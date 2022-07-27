@@ -20,4 +20,5 @@ export class AccountService {
   login(email: string, password: string): Observable<string> {
     return this.http.post<string>(this.apiUrl, { Email: email, Password: password }, this.httpOptions);
   }
+
 }

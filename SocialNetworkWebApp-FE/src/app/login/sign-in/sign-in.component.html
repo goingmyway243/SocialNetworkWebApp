@@ -6,8 +6,8 @@
         <div class="contact">
             <form>
                 <h1>SIGN IN</h1>
-                <input [(ngModel)]="email" name='email' type="text" placeholder="EMAIL">
-                <input [(ngModel)]="password" name='password' type="password" placeholder="PASSWORD">
+                <input [(ngModel)]="user.email" name='email' type="text" placeholder="EMAIL">
+                <input [(ngModel)]="user.password" name='password' type="password" placeholder="PASSWORD">
                 <button type="button" class="submit" (click)="login()">LET'S GO</button>
             </form>
         </div>

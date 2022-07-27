@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ExploreComponent } from './dashboard/explore/explore.component';
+import { WallComponent } from './dashboard/wall/wall.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', component: AppComponent },
   {
     path: 'auth', component: LoginComponent,
     children: [
@@ -17,6 +21,16 @@ const routes: Routes = [
       { path: 'signup', component: SignUpComponent },
     ]
   },
+  {
+    path: 'home', component: DashboardComponent,
+    children: [
+      {
+        path: '', component: ExploreComponent,
+        loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule)
+      },
+      { path: 'wall', component: WallComponent }
+    ]
+  }
 ];
 
 @NgModule({
