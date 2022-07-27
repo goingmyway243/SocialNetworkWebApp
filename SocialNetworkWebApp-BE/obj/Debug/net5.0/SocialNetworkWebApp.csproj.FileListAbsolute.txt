@@ -1,0 +1,126 @@
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\appsettings.Development.json
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\appsettings.json
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.exe
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.deps.json
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.runtimeconfig.json
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.runtimeconfig.dev.json
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\ref\SocialNetworkWebApp.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\SocialNetworkWebApp.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Humanizer.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.csproj.AssemblyReference.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.AssemblyInfoInputs.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.AssemblyInfo.cs
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.csproj.CoreCompileInputs.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.MvcApplicationPartsAssemblyInfo.cs
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.MvcApplicationPartsAssemblyInfo.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\staticwebassets\SocialNetworkWebApp.StaticWebAssets.Manifest.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\staticwebassets\SocialNetworkWebApp.StaticWebAssets.xml
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\scopedcss\bundle\SocialNetworkWebApp.styles.css
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.RazorTargetAssemblyInfo.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.csproj.CopyComplete
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\ref\SocialNetworkWebApp.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.pdb
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.genruntimeconfig.cache
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.Contracts.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\appsettings.json
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.StaticWebAssets.xml
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.exe
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.deps.json
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.runtimeconfig.json
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.runtimeconfig.dev.json
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\SocialNetworkWebApp.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Humanizer.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\MediatR.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\MediatR.Contracts.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\System.Runtime.Caching.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.csproj.AssemblyReference.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.AssemblyInfoInputs.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.AssemblyInfo.cs
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.csproj.CoreCompileInputs.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\scopedcss\bundle\SocialNetworkWebApp.styles.css
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\staticwebassets\SocialNetworkWebApp.StaticWebAssets.Manifest.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.RazorTargetAssemblyInfo.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.csproj.CopyComplete
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\refint\SocialNetworkWebApp.dll
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.pdb
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\SocialNetworkWebApp.genruntimeconfig.cache
+C:\Users\dang.nguyen\Documents\MyProjects\SocialNetworkWebApp---BE\obj\Debug\net5.0\ref\SocialNetworkWebApp.dll
