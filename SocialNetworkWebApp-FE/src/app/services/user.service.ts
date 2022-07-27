@@ -28,13 +28,13 @@ export class UserService {
     return this.http.get<User>(getUrl);
   }
 
-  add(student: User): Observable<string> {
-    return this.http.post<string>(this.apiUrl, student, this.httpOptions);
+  add(user: User): Observable<string> {
+    return this.http.post<string>(this.apiUrl, user, this.httpOptions);
   }
 
-  update(student: User): Observable<string> {
-    let putUrl = `${this.apiUrl}/${student.id}`;
-    return this.http.put<string>(putUrl, student, this.httpOptions);
+  update(user: User): Observable<string> {
+    let putUrl = `${this.apiUrl}/${user.id}`;
+    return this.http.put<string>(putUrl, user, this.httpOptions);
   }
 
   delete(id: string): Observable<string> {

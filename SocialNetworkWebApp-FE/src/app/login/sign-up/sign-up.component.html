@@ -4,21 +4,24 @@
 <div class="login_box">
     <div class="left">
         <div class="contact">
-            <form action="">
+            <form>
                 <h1>SIGN UP</h1>
 
-                <input type="email" name="email" placeholder="E-mail" />
-                <input type="text" class="inline" name="firstName" placeholder="First name" />
-                <input type="text" class="inline input-right" name="lastName" placeholder="Last name" />
-                <input type="tel" name="phone" placeholder="Phone number" />
+                <input [(ngModel)]="user.email" type="email" name="email" placeholder="E-mail" />
+                <input [(ngModel)]="user.firstName" type="text" class="inline" name="firstName"
+                    placeholder="First name" />
+                <input [(ngModel)]="user.lastName" type="text" class="inline input-right" name="lastName"
+                    placeholder="Last name" />
+                <input [(ngModel)]="user.phone" type="tel" name="phone" placeholder="Phone number" />
                 <div>
                     <label for="dateOfBirth">Date of birth</label>
-                    <input class="inline" type="date" name="dateOfBirth" placeholder="Date of birth" />
+                    <input [(ngModel)]="user.dateOfBirth" class="inline" type="date" name="dateOfBirth"
+                        placeholder="Date of birth" />
                 </div>
-                <input type="password" name="password" placeholder="Password" />
-                <input type="password" name="password2" placeholder="Retype password" />
+                <input [(ngModel)]="user.password" type="password" name="password" placeholder="Password" />
+                <input [(ngModel)]="retypePassword" type="password" name="password2" placeholder="Retype password" />
 
-                <button type="submit" class="submit">Sign me up</button>
+                <button type="button" class="submit" (click)="register()">Sign me up</button>
             </form>
         </div>
     </div>
