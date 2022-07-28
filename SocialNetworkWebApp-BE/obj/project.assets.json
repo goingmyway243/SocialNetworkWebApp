@@ -6066,19 +6066,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dang.nguyen\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dang.nguyen\\Documents\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\SocialNetworkWebApp.csproj",
+      "projectUniqueName": "D:\\Code PJ\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\SocialNetworkWebApp.csproj",
       "projectName": "SocialNetworkWebApp",
-      "projectPath": "C:\\Users\\dang.nguyen\\Documents\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\SocialNetworkWebApp.csproj",
-      "packagesPath": "C:\\Users\\dang.nguyen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dang.nguyen\\Documents\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\obj\\",
+      "projectPath": "D:\\Code PJ\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\SocialNetworkWebApp.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Code PJ\\SocialNetworkWebApp\\SocialNetworkWebApp-BE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6149,7 +6149,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
       }
     }
   }
