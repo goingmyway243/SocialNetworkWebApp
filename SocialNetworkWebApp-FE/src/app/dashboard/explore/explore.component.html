@@ -3,13 +3,15 @@
         <!-- ===================== LEFT =========================== -->
         <div class="left">
             <a class="profile">
-                <div class="profile-picture">
-                    <img src="https://giaingo.info/wp-content/uploads/2022/05/avatar2.jpg" alt="">
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img src={{this.currentUser.getAvatar()}}
+                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
+                        alt="">
                 </div>
                 <div class="handle">
-                    <h4>My Name</h4>
+                    <h4>{{this.currentUser.getFullName()}}</h4>
                     <p class="text-muted">
-                        @dayi
+                        @{{this.currentUser.email}}
                     </p>
                 </div>
             </a>
@@ -41,7 +43,9 @@
             <div class="stories">
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="https://giaingo.info/wp-content/uploads/2022/05/avatar2.jpg" alt="">
+                        <img src={{this.currentUser.getAvatar()}}
+                            onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
+                            alt="">
                     </div>
                     <p class="name text-bold">Your Story</p>
                 </div>
@@ -72,8 +76,10 @@
             </div>
             <!------------------------- Post --------------------->
             <form action="" class="create-post">
-                <div class="profile-picture">
-                    <img src="https://giaingo.info/wp-content/uploads/2022/05/avatar2.jpg" alt="">
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img src={{this.currentUser.getAvatar()}}
+                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
+                        alt="">
                 </div>
                 <input type="text" placeholder="What's on your mind?">
                 <input type="submit" value="Post" class="btn btn-primary">
@@ -256,8 +262,8 @@
                 <h6>Aa</h6>
                 <div class="choose-size">
                     <span class="font-size-1"></span>
-                    <span class="font-size-2 active"></span>
-                    <span class="font-size-3"></span>
+                    <span class="font-size-2 "></span>
+                    <span class="font-size-3 active"></span>
                     <span class="font-size-4"></span>
                     <span class="font-size-5"></span>
                 </div>

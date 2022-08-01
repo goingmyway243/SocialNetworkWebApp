@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,11 +10,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  user?: User;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.initElementsClickEvent();
+    this.getCurrentUser();
+  }
+
+  getCurrentUser(): void {
+    let userID = localStorage.getItem('authorizeToken');
+    if (userID) {
+      this.userService
+        .getById(userID)
+        .subscribe(data =>
+          this.user = Object.assign(new User, data),
+          error => console.log(error));
+    }
   }
 
   navigateToWall(): void {

@@ -1,26 +1,7 @@
 @import url('../dashboard.component.scss');
 
-$color-white: hsl(252, 30%, 100%);
-$color-light: hsl(252, 30%, 95%);
-$color-gray: hsl(252, 15%, 65%);
-$color-primary: hsl(252, 75%, 60%);
-$color-secondary: hsl(252, 100%, 90%);
-$color-success: hsl(120, 95%, 65%);
-$color-danger: hsl(0, 95%, 65%);
-$color-dark: hsl(252, 30%, 17%);
-$color-black: hsl(252, 30%, 10%);
-
-$border-radius: 2rem;
-$card-border-radius: 1rem;
-$btn-padding: 0.6rem 2rem;
-$search-padding: 0.6rem 1rem;
-$card-padding: 1rem;
-
-$sticky-top-left: 5.4rem;
-$sticky-top-right: -18rem;
-
 body {
-    background-color: $color-light;
+    background-color: var(--color-light);
 }
 
 *,
@@ -41,9 +22,9 @@ body {
 
 .btn {
     display: inline-block;
-    padding: $btn-padding;
+    padding: var(--btn-padding);
     font-weight: 500;
-    border-radius: $border-radius;
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 300ms ease;
     font-size: 0.9rem;
@@ -54,7 +35,7 @@ body {
 }
 
 .btn-primary {
-    background-color: $color-primary;
+    background-color: var(--color-primary);
     color: white;
 }
 
@@ -64,16 +45,17 @@ body {
     display: grid;
     grid-template-columns: 25vh auto 20vw;
     column-gap: 2rem;
+    color: var(--color-dark);
 
     .left {
         height: max-content;
         position: sticky;
-        top: $sticky-top-left;
+        top: var(--sticky-top-left);
 
         .profile {
-            padding: $card-padding ;
-            background-color: $color-white;
-            border-radius: $card-border-radius;
+            padding: var(--card-padding);
+            background-color: var(--color-white);
+            border-radius: var(--card-border-radius);
             display: flex;
             align-items: center;
             column-gap: 1rem;
@@ -83,8 +65,8 @@ body {
         /* ========================= SIDEBAR =============================*/
         .side-bar {
             margin-top: 1rem;
-            background-color: $color-white;
-            border-radius: $card-border-radius;
+            background-color: var(--color-white);
+            border-radius: var(--card-border-radius);
 
             .menu-item {
                 display: flex;
@@ -95,23 +77,23 @@ body {
                 position: relative;
 
                 &:hover {
-                    background-color: $color-light;
+                    background-color: var(--color-light);
                 }
 
                 &:first-child.active {
-                    border-top-left-radius: $card-border-radius;
+                    border-top-left-radius: var(--card-border-radius);
                     overflow: hidden;
                 }
 
                 &:last-child.active {
-                    border-bottom-left-radius: $card-border-radius;
+                    border-bottom-left-radius: var(--card-border-radius);
                     overflow: hidden;
                 }
             }
 
             i {
                 font-size: 1.4rem;
-                color: $color-gray;
+                color: var(--color-gray);
                 margin-left: 2rem;
                 position: relative;
             }
@@ -119,14 +101,15 @@ body {
             h3 {
                 margin-left: 1.5rem;
                 font-size: 1rem;
+                color: var(--color-dark);
             }
 
             .active {
-                background-color: $color-light;
+                background-color: var(--color-light);
 
                 i,
                 h3 {
-                    color: $color-primary;
+                    color: var(--color-primary);
                 }
 
                 &::before {
@@ -135,7 +118,7 @@ body {
                     width: 0.5rem;
                     height: 100%;
                     position: absolute;
-                    background-color: $color-primary;
+                    background-color: var(--color-primary);
                 }
             }
         }
@@ -151,7 +134,7 @@ body {
     .middle {
         .btn {
             font-size: 0.9rem;
-            padding: $btn-padding;
+            padding: var(--btn-padding);
         }
 
         .stories {
@@ -161,8 +144,8 @@ body {
             gap: 0.5rem;
 
             .story {
-                padding: $card-padding;
-                border-radius: $card-border-radius;
+                padding: var(--card-padding);
+                border-radius: var(--card-border-radius);
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -200,7 +183,7 @@ body {
                     width: 2.2rem;
                     height: 2.2rem;
                     align-self: flex-start;
-                    border: 3px solid $color-primary;
+                    border: 3px solid var(--color-primary);
                 }
             }
         }
@@ -211,16 +194,16 @@ body {
             align-items: center;
             justify-content: space-between;
             margin-top: 1rem;
-            background-color: $color-white;
-            padding: 0.4rem $card-padding;
-            border-radius: $border-radius;
+            background-color: var(--color-white);
+            padding: 0.4rem var(--card-padding);
+            border-radius: var(--border-radius);
 
             input[type="text"] {
                 justify-self: flex-start;
                 width: 100%;
                 padding-left: 1rem;
                 background: transparent;
-                color: $color-dark;
+                color: var(--color-dark);
                 margin-right: 1rem;
                 font-size: 1rem;
             }
@@ -229,9 +212,9 @@ body {
         /* ========================= FEEDS =============================*/
         .feeds {
             .feed {
-                background-color: $color-white;
-                border-radius: $card-border-radius;
-                padding: $card-padding;
+                background-color: var(--color-white);
+                border-radius: var(--card-border-radius);
+                padding: var(--card-padding);
                 margin: 1rem 0;
                 font-size: 0.85rem;
                 line-height: 1.5;
@@ -247,7 +230,7 @@ body {
                 }
 
                 .photo {
-                    border-radius: $card-border-radius;
+                    border-radius: var(--card-border-radius);
                     overflow: hidden;
                     margin: 0.7rem 0;
                 }
@@ -281,7 +264,7 @@ body {
                 display: block;
                 border-radius: 50%;
                 overflow: hidden;
-                border: 2px solid $color-white;
+                border: 2px solid var(--color-white);
                 margin-left: -0.6rem;
 
                 &:first-child {
@@ -300,7 +283,7 @@ body {
         }
 
         .harsh-tag {
-            color: $color-primary;
+            color: var(--color-primary);
         }
 
         .photo {
@@ -311,18 +294,18 @@ body {
     .right {
         height: max-content;
         position: sticky;
-        top: $sticky-top-right;
+        top: var(--sticky-top-right);
         bottom: 0;
 
         .btn {
             font-size: 0.9rem;
-            padding: $btn-padding;
+            padding: var(--btn-padding);
         }
 
         .messages {
-            background-color: $color-white;
-            border-radius: $card-border-radius;
-            padding: $card-padding;
+            background-color: var(--color-white);
+            border-radius: var(--card-border-radius);
+            padding: var(--card-padding);
 
             .heading {
                 display: flex;
@@ -338,9 +321,9 @@ body {
             .search-bar {
                 display: flex;
                 align-items: center;
-                background-color: $color-light;
-                border-radius: $border-radius;
-                padding: $search-padding;
+                background-color: var(--color-light);
+                border-radius: var(--border-radius);
+                padding: var(--search-padding);
                 margin-bottom: 1rem;
 
                 input[type="search"] {
@@ -348,10 +331,10 @@ body {
                     width: 30vw;
                     margin-left: 1rem;
                     font-size: 0.9rem;
-                    color: $color-dark;
+                    color: var(--color-dark);
 
                     &::placeholder {
-                        color: $color-gray;
+                        color: var(--color-gray);
                     }
                 }
             }
@@ -364,13 +347,13 @@ body {
                 h6 {
                     width: 100%;
                     text-align: center;
-                    border-bottom: 4px solid $color-light;
+                    border-bottom: 4px solid var(--color-light);
                     padding-bottom: 0.5rem;
                     font-size: 0.85rem;
                 }
 
                 .active {
-                    border-color: $color-dark;
+                    border-color: var(--color-dark);
                 }
             }
 
@@ -400,8 +383,7 @@ body {
                         width: 0.8rem;
                         height: 0.8rem;
                         border-radius: 50%;
-                        border-radius: 3px solid $color-white;
-                        background-color: $color-success;
+                        background-color: var(--color-success);
                         position: absolute;
                         bottom: 0;
                         right: 0;
@@ -410,7 +392,7 @@ body {
             }
 
             .message-requests {
-                color: $color-primary;
+                color: var(--color-primary);
             }
         }
 
@@ -418,15 +400,15 @@ body {
             margin-top: 1rem;
 
             h4 {
-                color: $color-gray;
+                color: var(--color-gray);
                 margin-bottom: 1rem;
             }
         }
 
         .request {
-            background-color: $color-white;
-            padding: $card-padding;
-            border-radius: $card-border-radius;
+            background-color: var(--color-white);
+            padding: var(--card-padding);
+            border-radius: var(--card-border-radius);
             margin-bottom: 0.7rem;
 
             .info {
@@ -458,11 +440,11 @@ body {
     display: none;
 
     .card {
-        background-color: $color-white;
+        background-color: var(--color-white);
         padding: 3rem;
-        border-radius: $card-border-radius;
+        border-radius: var(--card-border-radius);
         width: 50%;
-        box-shadow: 0 0 1rem $color-primary;
+        box-shadow: 0 0 1rem var(--color-primary);
     }
 
     .font-size {
@@ -472,14 +454,14 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: $color-light;
-            padding: $search-padding;
-            border-radius: $card-border-radius;
+            background-color: var(--color-light);
+            padding: var(--search-padding);
+            border-radius: var(--card-border-radius);
         }
     }
 
     .choose-size {
-        background-color: $color-secondary;
+        background-color: var(--color-secondary);
         height: 0.3rem;
         width: 100%;
         margin: 0 1rem;
@@ -490,12 +472,12 @@ body {
         span {
             width: 1rem;
             height: 1rem;
-            background-color: $color-secondary;
+            background-color: var(--color-secondary);
             border-radius: 50%;
             cursor: pointer;
 
             &.active {
-                background-color: $color-primary;
+                background-color: var(--color-primary);
             }
         }
     }
@@ -505,9 +487,9 @@ body {
     }
 
     .choose-color {
-        background-color: $color-light;
-        padding: $search-padding;
-        border-radius: $card-border-radius;
+        background-color: var(--color-light);
+        padding: var(--search-padding);
+        border-radius: var(--card-border-radius);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -554,7 +536,7 @@ body {
         gap: 1.5rem;
 
         >div {
-            padding: $card-padding;
+            padding: var(--card-padding);
             width: 100%;
             display: flex;
             align-items: center;
@@ -564,13 +546,13 @@ body {
             cursor: pointer;
 
             &.active {
-                border: 2px solid $color-primary;
+                border: 2px solid var(--color-primary);
             }
 
             span {
                 width: 2rem;
                 height: 2rem;
-                border: 2px solid $color-gray;
+                border: 2px solid var(--color-gray);
                 border-radius: 50%;
                 margin-right: 1rem;
             }
@@ -625,7 +607,6 @@ body {
         .left {
             grid-column: 3/4;
             position: fixed;
-            bottom: 0;
             right: 0;
         }
 

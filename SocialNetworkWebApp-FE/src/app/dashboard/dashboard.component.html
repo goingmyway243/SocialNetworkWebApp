@@ -57,9 +57,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-picture" (click)="navigateToWall()"><img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd7SeoDA2PxCcdbtBxBAHYw1xiP_CpXmRFyKSyyiC2Pr_A_vf34p816fwajWCCR9eHBo&usqp=CAU"
-                        alt=""></div>
+                <div *ngIf="this.user" class="profile-picture" (click)="navigateToWall()">
+                    <img src="{{this.user.getAvatar()}}"
+                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
+                        alt="">
+                </div>
             </div>
         </div>
     </nav>

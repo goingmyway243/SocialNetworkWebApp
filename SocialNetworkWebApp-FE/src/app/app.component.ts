@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'SocialNetworkWebApp';
+  static baseUrl: string = 'https://localhost:5001/';
 
   constructor(private router: Router) { }
 
