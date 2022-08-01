@@ -32,6 +32,11 @@ export class ExploreComponent implements OnInit {
     }
   }
 
+  logout(): void {
+    localStorage.removeItem('authorizeToken');
+    this.router.navigateByUrl('');
+  }
+
   navigateToWall(): void {
     this.router.navigateByUrl('/home/wall');
   }
@@ -60,6 +65,11 @@ export class ExploreComponent implements OnInit {
         item.classList.add('active');
       });
     });
+  }
+
+  initCategoriesClickEvent(): void {
+    const categories = document.querySelectorAll('.category');
+
   }
 
   initSearchMessageEvent(): void {
