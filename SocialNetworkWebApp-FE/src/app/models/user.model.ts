@@ -25,6 +25,10 @@ export class User {
         return AppComponent.baseUrl + 'app-images/' + this.id + '.jpg';
     }
 
+    getDefaultAvatar(): string {
+        return AppComponent.defaultAvatar;
+    }
+
     getFullName(): string {
         return this.firstName + ' ' + this.lastName;
     }

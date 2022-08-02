@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-explore',
@@ -12,6 +13,8 @@ export class ExploreComponent implements OnInit {
   root: HTMLElement = document.querySelector(':root') as HTMLElement;
 
   currentUser: User = new User();
+  post: string = '';
+  images: string[] = new Array();
 
   constructor(private router: Router,
     private userService: UserService) { }
@@ -33,8 +36,60 @@ export class ExploreComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('authorizeToken');
-    this.router.navigateByUrl('');
+    Swal.fire({
+      icon: 'question',
+      title: 'Logout',
+      text: 'Are you sure?',
+      showCancelButton: true,
+      showConfirmButton: true,
+      focusCancel: true,
+      confirmButtonText: 'Yes, log me out',
+      cancelButtonText: 'No, stay here',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
+    }).then(result => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('authorizeToken');
+        this.router.navigateByUrl('');
+      }
+    });
+  }
+
+  onImageSelected(event: any): void {
+    const file = event.target.files[0];
+    const wrapper = document.getElementById('image-wrapper');
+
+    if (file) {
+      let img = document.createElement('img');
+
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);  // no longer needed, free memory
+      }
+      img.src = URL.createObjectURL(file); // set src to blob url
+      img.style.width = '30%';
+      img.style.height = '15rem';
+      img.style.objectFit = 'cover';
+
+
+      wrapper?.appendChild(img);
+      this.showCreatePost();
+    }
+  }
+
+  showSettings(show: boolean): void {
+    const tabHome = document.querySelector('.tab-home') as HTMLElement;
+    const tabSettings = document.querySelector('.tab-settings') as HTMLElement;
+
+    tabHome.style.display = !show ? 'block' : 'none';
+    tabSettings.style.display = show ? 'block' : 'none';
+  }
+
+  showCreatePost(): void {
+    const modal = document.querySelector('.posting') as HTMLElement;
+    const textarea = document.querySelector('.posting .textarea') as HTMLTextAreaElement;
+
+    modal.style.display = 'grid';
+    textarea.focus();
   }
 
   navigateToWall(): void {
@@ -42,8 +97,12 @@ export class ExploreComponent implements OnInit {
   }
 
   initElementsClickEvent(): void {
-    this.initMenuItemsClickEvent();
+    this.initCreatePostEvent();
     this.initSearchMessageEvent();
+
+    this.initMenuItemsClickEvent();
+    // this.initCategoriesClickEvent();
+
     this.initThemeCustomization();
     this.initFontSizeCustomization();
     this.initColorCustomization();
@@ -61,6 +120,10 @@ export class ExploreComponent implements OnInit {
 
     menuItems.forEach(item => {
       item.addEventListener('click', () => {
+        if (item.id == 'home' && item.classList.contains('active')) {
+          location.reload();
+        }
+
         changeActiveItem();
         item.classList.add('active');
       });
@@ -68,15 +131,42 @@ export class ExploreComponent implements OnInit {
   }
 
   initCategoriesClickEvent(): void {
-    const categories = document.querySelectorAll('.category');
+    const categories = document.querySelectorAll('.category h6');
 
+    const removeActiveCategoryClass = () => {
+      categories.forEach(item => {
+        item.classList.remove('active');
+      });
+    };
+
+    categories.forEach(item => {
+      item.addEventListener('click', () => {
+        removeActiveCategoryClass();
+        item.classList.add('active');
+      });
+    });
+  }
+
+  initCreatePostEvent(): void {
+    const input = document.querySelector('.create-post input') as HTMLInputElement;
+    const modal = document.querySelector('.posting') as HTMLElement;
+    const textarea = document.querySelector('.posting .textarea') as HTMLTextAreaElement;
+
+    input.addEventListener('click', () => this.showCreatePost());
+
+    modal.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).classList.contains('posting')) {
+        modal.style.display = 'none';
+        this.post = textarea.innerHTML;
+      }
+    });
   }
 
   initSearchMessageEvent(): void {
     const listMessage = document.querySelectorAll('.message');
     const messageSearch = document.getElementById('message-search') as HTMLInputElement;
 
-    messageSearch?.addEventListener('keyup', () => {
+    messageSearch?.addEventListener('input', () => {
       const keyword = messageSearch.value.toLowerCase();
       listMessage.forEach(chat => {
         let name = chat.querySelector('h5')?.textContent?.toLowerCase();
@@ -87,6 +177,7 @@ export class ExploreComponent implements OnInit {
   }
 
   initThemeCustomization(): void {
+    const homeBtn = document.getElementById('home');
     const themeBtn = document.getElementById('theme');
     const themeModal = document.querySelector('.customize-theme') as HTMLElement;
 
@@ -97,6 +188,7 @@ export class ExploreComponent implements OnInit {
     themeModal.addEventListener('click', (event) => {
       if ((event.target as HTMLElement).classList.contains('customize-theme')) {
         themeModal.style.display = 'none';
+        homeBtn?.click();
       }
     })
   }

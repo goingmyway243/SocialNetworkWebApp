@@ -4,9 +4,7 @@
         <div class="left">
             <a class="profile">
                 <div class="profile-picture" (click)="navigateToWall()">
-                    <img src={{this.currentUser.getAvatar()}}
-                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
-                        alt="">
+                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
                 </div>
                 <div class="handle">
                     <h4>{{this.currentUser.getFullName()}}</h4>
@@ -16,7 +14,7 @@
                 </div>
             </a>
             <div class="side-bar">
-                <a class="menu-item active">
+                <a class="menu-item active" (click)="showSettings(false)" id="home">
                     <span><i class="uil uil-house-user"></i></span>
                     <h3>Home</h3>
                 </a>
@@ -28,13 +26,13 @@
                     <span><i class="uil uil-palette"></i></span>
                     <h3>Theme</h3>
                 </a>
-                <a class="menu-item" id="theme" *ngIf="currentUser.role == 1">
-                    <span><i class="uil uil-key-skeleton-alt"></i></span>
+                <a class="menu-item" *ngIf="currentUser.role == 1">
+                    <span><i class="uil uil-window"></i></span>
                     <h3>Admin</h3>
                 </a>
-                <a class="menu-item" (click)="logout()">
-                    <span><i class="uil uil-signout"></i></span>
-                    <h3>Logout</h3>
+                <a class="menu-item" (click)="showSettings(true)">
+                    <span><i class="uil uil-setting"></i></span>
+                    <h3>Settings</h3>
                 </a>
             </div>
             <label for="create-post" class="btn btn-primary">
@@ -43,8 +41,9 @@
         </div>
         <!-- ===================== MIDDLE =========================== -->
         <div class="middle">
-            <!------------------- Stories ---------------------->
-            <!-- <div class="stories">
+            <div class="tab-home">
+                <!------------------- Stories ---------------------->
+                <!-- <div class="stories">
                 <div class="story">
                     <div class="profile-picture">
                         <img src={{this.currentUser.getAvatar()}}
@@ -78,71 +77,82 @@
                     <p class="name text-bold">Wibu</p>
                 </div>
             </div> -->
-            <!------------------------- Post --------------------->
-            <form action="" class="create-post">
-                <div class="profile-picture" (click)="navigateToWall()">
-                    <img src={{this.currentUser.getAvatar()}}
-                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
-                        alt="">
+                <!------------------------- Post --------------------->
+                <div class="create-post">
+                    <div class="profile-picture" (click)="navigateToWall()">
+                        <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                    </div>
+                    <input type="text" placeholder="What's on your mind?" [(ngModel)]="this.post">
+                    <label for="upload-image" class="btn btn-success"><i class="uil uil-images"></i></label>
+                    <input id="upload-image" type="file" accept="image/*" (change)="onImageSelected($event)" hidden />
                 </div>
-                <input type="text" placeholder="What's on your mind?">
-                <input type="submit" value="Post" class="btn btn-primary">
-            </form>
 
-            <!------------------ Feeds ------------------------->
-            <div class="feeds">
-                <div class="feed">
-                    <div class="head">
-                        <div class="user">
-                            <div class="profile-picture">
-                                <img src="https://cdn-icons-png.flaticon.com/512/168/168882.png" alt="">
+                <!------------------ Feeds ------------------------->
+                <div class="feeds">
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-picture">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/168/168882.png" alt="">
+                                </div>
+                                <div class="ingo">
+                                    <h3>Hahaha</h3>
+                                    <small class="text-muted">Dubai, 15 MINUTES AGO</small>
+                                </div>
                             </div>
-                            <div class="ingo">
-                                <h3>Hahaha</h3>
-                                <small class="text-muted">Dubai, 15 MINUTES AGO</small>
+                            <span class="edit">
+                                <i class="uil uil-ellipsis-h"></i>
+                            </span>
+                        </div>
+
+                        <div class="caption">
+                            <p>Phim hay lắm anh em ạ ! <span class="harsh-tag">#Hayate</span></p>
+                        </div>
+
+                        <div class="photo">
+                            <img src="https://genk.mediacdn.vn/thumb_w/600/DlBlzccccccccccccE5CT3hqq3xN9o/Image/2014/01/2-dcde9.png"
+                                alt="">
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="interaction-buttons">
+                                <span><i class="uil uil-thumbs-up"></i></span>
+                                <span><i class="uil uil-comment-alt-dots"></i></span>
+                                <span><i class="uil uil-share"></i></span>
+                            </div>
+                            <div class="bookmark">
+                                <span><i class="uil uil-bookmark-full"></i></span>
                             </div>
                         </div>
-                        <span class="edit">
-                            <i class="uil uil-ellipsis-h"></i>
-                        </span>
-                    </div>
 
-                    <div class="caption">
-                        <p>Phim hay lắm anh em ạ ! <span class="harsh-tag">#Hayate</span></p>
-                    </div>
-
-                    <div class="photo">
-                        <img src="https://genk.mediacdn.vn/thumb_w/600/DlBlzccccccccccccE5CT3hqq3xN9o/Image/2014/01/2-dcde9.png"
-                            alt="">
-                    </div>
-
-                    <div class="action-buttons">
-                        <div class="interaction-buttons">
-                            <span><i class="uil uil-thumbs-up"></i></span>
-                            <span><i class="uil uil-comment-alt-dots"></i></span>
-                            <span><i class="uil uil-share"></i></span>
+                        <div class="liked-by">
+                            <span><img src="https://i.pinimg.com/736x/a6/61/f4/a661f414ac9a447b953338b2c953bb38.jpg"
+                                    alt=""></span>
+                            <span><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
+                                    alt=""></span>
+                            <span><img
+                                    src="https://guantanamocity.org/wp-content/uploads/2020/12/tong-hop-avatar-anime-avatar-anime-doi-cool-ngau-cute-panda-brown-1.jpg"
+                                    alt=""></span>
+                            <p>Liked by <b>Wibu</b> and <b>2,333 others</b></p>
                         </div>
-                        <div class="bookmark">
-                            <span><i class="uil uil-bookmark-full"></i></span>
-                        </div>
-                    </div>
 
-                    <div class="liked-by">
-                        <span><img src="https://i.pinimg.com/736x/a6/61/f4/a661f414ac9a447b953338b2c953bb38.jpg"
-                                alt=""></span>
-                        <span><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
-                                alt=""></span>
-                        <span><img
-                                src="https://guantanamocity.org/wp-content/uploads/2020/12/tong-hop-avatar-anime-avatar-anime-doi-cool-ngau-cute-panda-brown-1.jpg"
-                                alt=""></span>
-                        <p>Liked by <b>Wibu</b> and <b>2,333 others</b></p>
+                        <div class="comments text-muted">View all 69 comments</div>
                     </div>
-
-                    <div class="comments text-muted">View all 69 comments</div>
                 </div>
             </div>
 
-
+            <div class="tab-settings">
+                <div class="action-buttons">
+                    <button class="btn btn-primary">
+                        <i class="uil uil-asterisk"></i>
+                        <span>Change password</span>
+                    </button>
+                    <button class="btn btn-primary" (click)="logout()">
+                        <i class="uil uil-signout"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
         </div>
         <!-- ====================== RIGHT ========================== -->
         <div class="right">
@@ -303,5 +313,37 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div class="posting">
+    <div class="card">
+        <div class="title">
+            <h2>Create Post</h2>
+        </div>
+        <div class="content">
+            <a class="profile">
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                </div>
+                <div class="handle">
+                    <h4>{{this.currentUser.getFullName()}}</h4>
+                    <p class="text-muted">
+                        @{{this.currentUser.email}}
+                    </p>
+                </div>
+            </a>
+            <span class="textarea" role="textbox" contenteditable="true" [textContent]="post"></span>
+            <!-- <div *ngFor="let image of this.images">
+                <img [src]="image" />
+            </div> -->
+            <div id="image-wrapper"></div>
+            <div class="add-ons">
+                <h4>Add to your post</h4>
+                <label for="upload-image" class="btn btn-success"><i class="uil uil-images"></i></label>
+                <input id="upload-image" type="file" accept="image/*" (change)="onImageSelected($event)" hidden />
+            </div>
+            <button class="btn btn-primary">Post</button>
+        </div>
     </div>
 </div>

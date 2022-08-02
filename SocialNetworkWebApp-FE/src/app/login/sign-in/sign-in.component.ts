@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Util } from 'src/app/helpers/util';
 import { User } from 'src/app/models/user.model';
 import { AccountService } from 'src/app/services/account.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -29,7 +30,15 @@ export class SignInComponent implements OnInit {
 
   onLoginSuccess(userID: string): void {
     localStorage.setItem('authorizeToken', userID);
-    alert('Login successfully!');
-    this.router.navigateByUrl('');
+
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Login successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(result => {
+      this.router.navigateByUrl('');
+    });
   }
 }

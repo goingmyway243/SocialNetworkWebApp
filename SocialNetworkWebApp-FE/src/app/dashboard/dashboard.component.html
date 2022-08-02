@@ -58,9 +58,7 @@
                     </div>
                 </div>
                 <div *ngIf="this.user" class="profile-picture" (click)="navigateToWall()">
-                    <img src="{{this.user.getAvatar()}}"
-                        onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'"
-                        alt="">
+                    <img [src]="this.user.getAvatar()" (error)="this.user.getDefaultAvatar()" alt="">
                 </div>
             </div>
         </div>
