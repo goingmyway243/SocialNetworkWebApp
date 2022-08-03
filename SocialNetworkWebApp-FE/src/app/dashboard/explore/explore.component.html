@@ -15,7 +15,7 @@
 
                 <!------------------ Feeds ------------------------->
                 <div class="feeds">
-                    <app-posts></app-posts>
+                    <app-posts *ngFor="let feed of this.newFeeds" [postData]="feed"></app-posts>
                 </div>
             </div>
 

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -10,9 +12,10 @@ import { User } from 'src/app/models/user.model';
 export class CreatePostComponent implements OnInit {
   @Input() currentUser: User = new User();
 
-  post: string | null = '';
+  caption: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private postService: PostService) { }
 
   ngOnInit(): void {
     this.initCreatePostEvent();
@@ -20,6 +23,14 @@ export class CreatePostComponent implements OnInit {
 
   navigateToWall(): void {
     this.router.navigateByUrl('/home/wall');
+  }
+
+  createPost(): void {
+    let newPost = new Post();
+    newPost.userId = this.currentUser.id;
+    newPost.caption = this.caption;
+
+    this.postService.add(newPost).subscribe(_ => this.router.navigateByUrl(''));
   }
 
   onImageSelected(event: any): void {

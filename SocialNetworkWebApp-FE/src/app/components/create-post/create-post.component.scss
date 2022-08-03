@@ -93,6 +93,8 @@
             min-height: 40px;
             max-height: 30vh;
             line-height: 20px;
+            background-color: var(--color-white);
+            color: var(--color-dark);
 
             white-space: pre;
         }
@@ -117,7 +119,7 @@
             justify-content: space-between;
             align-items: center;
             border-radius: var(--card-border-radius);
-            border: 1px solid var(--color-light);
+            border: 1px solid var(--color-gray);
             padding: 0.5rem var(--card-padding);
             margin: 1rem 0;
 

@@ -1,12 +1,12 @@
-<div class="feed">
+<div class="feed" *ngIf="this.postData">
     <div class="head">
         <div class="user">
             <div class="profile-picture">
-                <img src="https://cdn-icons-png.flaticon.com/512/168/168882.png" alt="">
+                <img [src]="this.postOwner.getAvatar()" (error)="this.postOwner.getDefaultAvatar()" alt="">
             </div>
             <div class="ingo">
-                <h3>Hahaha</h3>
-                <small class="text-muted">Dubai, 15 MINUTES AGO</small>
+                <h3>{{this.postOwner.getFullName()}}</h3>
+                <small class="text-muted">{{this.postData.getTimeDiff()}}</small>
             </div>
         </div>
         <span class="edit">
@@ -15,12 +15,12 @@
     </div>
 
     <div class="caption">
-        <p>Phim hay lắm anh em ạ ! <span class="harsh-tag">#Hayate</span></p>
+        <p>{{this.postData.caption}}</p>
     </div>
 
-    <div class="photo">
+    <!-- <div class="photo">
         <img src="https://genk.mediacdn.vn/thumb_w/600/DlBlzccccccccccccE5CT3hqq3xN9o/Image/2014/01/2-dcde9.png" alt="">
-    </div>
+    </div> -->
 
     <div class="action-buttons">
         <div class="interaction-buttons">
