@@ -1,0 +1,42 @@
+<div class="create-post">
+    <div class="profile-picture" (click)="navigateToWall()">
+        <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+    </div>
+    <input type="text" placeholder="What's on your mind?" [value]="this.post">
+    <label for="upload-image" class="btn btn-success"><i class="uil uil-images"></i></label>
+    <input id="upload-image" type="file" accept="image/*" (change)="onImageSelected($event)" hidden />
+</div>
+
+<div class="posting">
+    <div class="card">
+        <div class="title">
+            <h2>Create Post</h2>
+        </div>
+        <div class="content">
+            <a class="profile">
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                </div>
+                <div class="handle">
+                    <h4>{{this.currentUser.getFullName()}}</h4>
+                    <p class="text-muted">
+                        @{{this.currentUser.email}}
+                    </p>
+                </div>
+            </a>
+            <!-- <span class="textarea" role="textbox" contenteditable="true" [textContent]="post"></span> -->
+            <textarea class="textarea" placeholder="What's on your mind?" [(ngModel)]="this.post"></textarea>
+            <div id="image-wrapper">
+                <!-- <div *ngFor="let image of this.images">
+                    <img [src]="image" />
+                </div> -->
+            </div>
+            <div class="add-ons">
+                <h4>Add to your post</h4>
+                <label for="upload-image" class="btn btn-success"><i class="uil uil-images"></i></label>
+                <input id="upload-image" type="file" accept="image/*" (change)="onImageSelected($event)" hidden />
+            </div>
+            <button class="btn btn-primary">Post</button>
+        </div>
+    </div>
+</div>

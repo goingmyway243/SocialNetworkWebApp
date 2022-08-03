@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-wall',
@@ -6,53 +8,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wall.component.scss']
 })
 export class WallComponent implements OnInit {
+  currentUser: User = new User();
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getCurrentUser();
+    this.initTabsClickEvent();
   }
 
-  public posts: any;
-
-  public currentUserProfile: any;
-
-  displayDate(date: Date) {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    const d = new Date(date);
-    const monthName = months[d.getMonth()];
-    const day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
-    return monthName + ' ' + day;
-  }
-
-  editProfile() {
-    // this.dialog.open(EditprofileComponent);
-  }
-
-  displayModal(event: any) {
-    event.stopPropagation();
-    const wpContainer = document.querySelector('.wp-container');
-    // wpContainer.classList.remove('hidden');
-    // document.querySelector('body').style.overflowY = 'hidden';
-  }
-
-  closeModal(event: any) {
-    if (!event.target.closest('.wp-child')) {
-      const wpContainer = document.querySelector('.wp-container');
-      // wpContainer.classList.add('hidden');
-      // document.querySelector('body').style.overflowY = 'inherit';
+  getCurrentUser(): void {
+    let userID = localStorage.getItem('authorizeToken');
+    if (userID) {
+      this.userService
+        .getById(userID)
+        .subscribe(data =>
+          this.currentUser = Object.assign(new User, data),
+          error => console.log(error));
     }
+  }
+
+  initTabsClickEvent(): void {
+    const tabs = document.querySelectorAll('.tabs span');
+    const postsLayout = document.querySelector('.container .posts-layout') as HTMLElement;
+    const friendsLayout = document.querySelector('.container .friends-layout') as HTMLElement;
+    const imagesLayout = document.querySelector('.container .images-layout') as HTMLElement;
+
+    const removeActiveClass = () => {
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        removeActiveClass();
+        tab.classList.add('active');
+
+        postsLayout.style.display = 'none';
+        friendsLayout.style.display = 'none';
+        imagesLayout.style.display = 'none';
+
+        if (tab.id == 'tab-posts') {
+          postsLayout.style.display = 'grid';
+        } else if (tab.id == 'tab-friends') {
+          friendsLayout.style.display = 'block';
+        }
+        else if (tab.id == 'tab-images') {
+          imagesLayout.style.display = 'block';
+        }
+      });
+    });
   }
 }

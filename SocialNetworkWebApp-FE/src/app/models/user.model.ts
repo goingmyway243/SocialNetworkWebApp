@@ -1,4 +1,5 @@
 import { AppComponent } from "../app.component";
+import { Util } from "../helpers/util";
 
 export class User {
     id: string;
@@ -31,5 +32,17 @@ export class User {
 
     getFullName(): string {
         return this.firstName + ' ' + this.lastName;
+    }
+
+    getEmailPrefix(): string {
+        let prefixIndex = this.email.indexOf('@');
+        if (prefixIndex === -1) {
+            return this.email;
+        }
+        return this.email.substring(0, prefixIndex);
+    }
+
+    getDateOfBirth(): string {
+        return Util.formatDate(this.dateOfBirth);
     }
 }

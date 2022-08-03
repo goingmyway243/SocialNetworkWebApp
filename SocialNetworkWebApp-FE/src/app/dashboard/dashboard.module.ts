@@ -5,6 +5,7 @@ import { WallComponent } from './wall/wall.component';
 import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ]
 })
 export class DashboardModule { }
