@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
-import { PostService } from 'src/app/services/post.service';
+import { NewfeedsService } from 'src/app/services/newfeeds.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -17,31 +18,25 @@ export class ExploreComponent implements OnInit {
 
   constructor(private router: Router,
     private userService: UserService,
-    private postService: PostService) { }
+    private newfeedsService: NewfeedsService) { }
 
   ngOnInit(): void {
-    this.getCurrentUser();
-    this.getNewFeeds();
+    this.getHomeInfomations();
   }
 
-  getCurrentUser(): void {
+  async getHomeInfomations(): Promise<void> {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
-      this.userService
-        .getById(userID)
-        .subscribe(data =>
-          this.currentUser = Object.assign(new User, data),
-          error => console.log(error));
+      this.currentUser = Object.assign(new User(), await firstValueFrom(this.userService.getById(userID)));
+      this.getNewFeeds();
     }
   }
 
   getNewFeeds(): void {
-    this.postService
-      .getAll()
-      .subscribe(data => {
-        this.newFeeds = data;
-        console.log(this.newFeeds);
-      },
+    this.newfeedsService
+      .getUserFeeds(this.currentUser.id)
+      .subscribe(data =>
+        this.newFeeds = data,
         error => console.log(error));
   }
 

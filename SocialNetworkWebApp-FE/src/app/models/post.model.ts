@@ -1,4 +1,6 @@
 import { Util } from '../helpers/util';
+import { Content } from './content.model';
+import { User } from './user.model';
 
 export class Post {
     id: string
@@ -7,6 +9,9 @@ export class Post {
     sharePostId?: string;
     createdTime: Date;
     updatedTime: Date;
+
+    contents?: Content[];
+    user?: User;
 
     constructor(id = '', caption = '', userId = '', createdTime = new Date(), updatedTime = new Date()) {
         this.id = id;

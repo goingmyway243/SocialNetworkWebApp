@@ -30,9 +30,11 @@
     }
 
     .photo {
+        gap: 0.2rem;
         border-radius: var(--card-border-radius);
         overflow: hidden;
         margin: 0.7rem 0;
+        position: relative;
     }
 
     .action-buttons {
@@ -83,6 +85,10 @@
 .caption {
     font-size: 1rem;
     margin: 1rem 0;
+
+    .line {
+        min-height: 0.5rem;
+    }
 }
 
 .harsh-tag {

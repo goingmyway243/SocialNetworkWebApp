@@ -250,3 +250,6 @@ D:\Code PJ\SocialNetworkWebApp\SocialNetworkWebApp-BE\obj\Debug\net5.0\SocialNet
 D:\Code PJ\SocialNetworkWebApp\SocialNetworkWebApp-BE\obj\Debug\net5.0\ref\SocialNetworkWebApp.dll
 D:\Code PJ\SocialNetworkWebApp\SocialNetworkWebApp-BE\obj\Debug\net5.0\SocialNetworkWebApp.pdb
 D:\Code PJ\SocialNetworkWebApp\SocialNetworkWebApp-BE\obj\Debug\net5.0\SocialNetworkWebApp.genruntimeconfig.cache
+C:\Users\dang.nguyen\Documents\SocialNetworkWebApp\SocialNetworkWebApp-BE\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\dang.nguyen\Documents\SocialNetworkWebApp\SocialNetworkWebApp-BE\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\dang.nguyen\Documents\SocialNetworkWebApp\SocialNetworkWebApp-BE\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

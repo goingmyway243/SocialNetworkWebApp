@@ -62,7 +62,7 @@
             <div class="my-posts">
                 <app-create-post [currentUser]="this.currentUser"></app-create-post>
                 <div class="feeds">
-                    <app-posts></app-posts>
+                    <app-posts *ngFor="let feed of this.myFeeds" [postData]="feed"></app-posts>
                 </div>
             </div>
         </div>

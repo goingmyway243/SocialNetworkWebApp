@@ -15,12 +15,12 @@
     </div>
 
     <div class="caption">
-        <p>{{this.postData.caption}}</p>
+        <p *ngFor="let line of this.captionArray" class="line">{{line}}</p>
     </div>
 
-    <!-- <div class="photo">
-        <img src="https://genk.mediacdn.vn/thumb_w/600/DlBlzccccccccccccE5CT3hqq3xN9o/Image/2014/01/2-dcde9.png" alt="">
-    </div> -->
+    <div class="photo">
+        <img *ngFor="let content of this.postData.contents" [src]="getFullLinkContent(content)" alt="">
+    </div>
 
     <div class="action-buttons">
         <div class="interaction-buttons">
