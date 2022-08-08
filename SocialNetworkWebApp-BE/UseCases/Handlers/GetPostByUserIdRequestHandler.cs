@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
 using SocialNetworkWebApp.Repositories.Base;
 using System.Collections.Generic;
@@ -10,28 +12,20 @@ namespace SocialNetworkWebApp.UseCases.Handlers
 {
     public class GetAllPostsByUserIdRequestHandler : IRequestHandler<GetAllPostsByUserIdRequest, IEnumerable<PostEntity>>
     {
-        private readonly IRepository<PostEntity> _postRepo;
-        private readonly IRepository<ContentEntity> _contentRepo;
+        private readonly SocialNetworkContext _dbContext;
 
         public GetAllPostsByUserIdRequestHandler(
-            IRepository<PostEntity> postRepo,
-            IRepository<ContentEntity> contentRepo)
+            SocialNetworkContext dbContext)
         {
-            _postRepo = postRepo;
-            _contentRepo = contentRepo;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<PostEntity>> Handle(GetAllPostsByUserIdRequest request, CancellationToken cancellationToken)
         {
-            var listPost = await _postRepo.GetAll();
-            var listContent = await _contentRepo.GetAll();
-
-            listPost.Where(post => post.UserId == request.UserId)
-                .ToList()
-                .ForEach(post =>
-                {
-                    post.Contents = listContent.Where(content => content.PostId == post.Id).ToList();
-                });
+            var listPost = await _dbContext.Posts
+                .Where(post => post.UserId == request.UserId)
+                .Include(post => post.Contents)
+                .ToListAsync();
 
             return listPost.OrderByDescending(post => post.CreatedTime);
         }

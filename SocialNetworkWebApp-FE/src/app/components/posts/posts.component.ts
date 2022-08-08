@@ -18,14 +18,19 @@ export class PostsComponent implements OnInit, AfterViewInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.postData = Object.assign(new Post(), this.postData);
-    this.captionArray = this.postData.caption.split('\n');
-
-    this.getPostOwner();
+    this.initEditButtonsClickEvent();
+    this.convertPostData();
   }
 
   ngAfterViewInit(): void {
     this.handleMultiImages();
+  }
+
+  convertPostData(): void {
+    this.postData = Object.assign(new Post(), this.postData);
+    this.captionArray = this.postData.caption.split('\n');
+
+    this.getPostOwner();
   }
 
   getPostOwner(): void {
@@ -57,5 +62,15 @@ export class PostsComponent implements OnInit, AfterViewInit {
       }
 
     }
+  }
+
+  initEditButtonsClickEvent(): void {
+    const ellipsis = document.querySelector('.edit .ellipsis');
+    const popup = document.querySelector('.edit .edit-popup') as HTMLElement;
+
+    ellipsis?.addEventListener('click', () => {
+      let visible = popup.style.display && popup.style.display !== 'none';
+      popup.style.display = visible ? 'none' : 'block';
+    });
   }
 }

@@ -30,6 +30,7 @@ namespace SocialNetworkWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IRepository<ChatroomEntity>, ChatroomRepository>();
             services.AddScoped<IRepository<CommentEntity>, CommentRepository>();

@@ -1,7 +1,7 @@
 @import url('../styles.scss');
 
 .action-buttons span:hover,
-.edit:hover {
+.edit .ellipsis:hover {
     opacity: 0.75;
 }
 
@@ -53,8 +53,48 @@
     }
 
     .edit {
-        font-size: 1.5rem;
-        cursor: pointer;
+        position: relative;
+
+        .ellipsis {
+            cursor: pointer;
+        }
+
+        .edit-buttons {
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        i {
+            font-size: 1.5rem;
+        }
+
+        .edit-popup {
+            display: none;
+            position: absolute;
+            top: 2rem;
+            right: 0rem;
+            width: max-content;
+            background-color: var(--color-white);
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-dark);
+            padding: 0.5rem;
+
+            z-index: 5;
+
+            .edit-buttons {
+                padding: 0 1.5rem 0 0.5rem;
+                font-weight: 500;
+                border-radius: 0.5rem;
+
+                i {
+                    margin-right: 0.5rem;
+                }
+
+                &:hover {
+                    background-color: rgba(211, 211, 211, 0.5);
+                }
+            }
+        }
     }
 }
 
