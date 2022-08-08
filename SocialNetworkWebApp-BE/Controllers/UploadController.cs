@@ -17,33 +17,73 @@ namespace SocialNetworkWebApp.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpPost("{folderName}")]
-        public IActionResult UploadImages(string folderName)
+        [HttpPost]
+        public IActionResult UploadImage()
         {
+            var result = false;
             try
             {
                 var files = HttpContext.Request.Form.Files;
                 if (files != null && files.Count > 0)
                 {
-                    foreach (var file in files)
+                    var file = files[0];
+                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Images", fileName + ".jpg");
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine("", _hostingEnvironment.ContentRootPath + "/Images/" + folderName + "/" + fileName);
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            file.CopyTo(stream);
-                        }
+                        file.CopyTo(stream);
                     }
-                    return Ok("Saved Successfully");
+
+                    result = true;
+                    return Ok(result);
                 }
                 else
                 {
-                    return BadRequest("No file to save!");
+                    return BadRequest(result);
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(result);
+            }
+        }
+
+        [HttpPost("{folderName}")]
+        public IActionResult UploadImages(string folderName)
+        {
+            var result = false;
+            try
+            {
+                var files = HttpContext.Request.Form.Files;
+                if (files != null && files.Count > 0)
+                {
+                    var file = files[0];
+                    var fileName = Path.GetFileName(file.FileName);
+                    var folderPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Images", folderName);
+
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    var path = Path.Combine(folderPath, fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    result = true;
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(result);
             }
         }
     }
