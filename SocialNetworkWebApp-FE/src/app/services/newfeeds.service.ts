@@ -7,8 +7,8 @@ import { Post } from '../models/post.model';
 @Injectable({
   providedIn: 'root'
 })
-export class NewfeedsService {
-  private apiUrl: string = AppComponent.baseUrl + 'api/NewFeeds';
+export class NewsFeedService {
+  private apiUrl: string = AppComponent.baseUrl + 'api/NewsFeed';
 
   constructor(private http: HttpClient) { }
 

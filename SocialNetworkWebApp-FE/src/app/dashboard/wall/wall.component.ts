@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
-import { NewfeedsService } from 'src/app/services/newfeeds.service';
+import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class WallComponent implements OnInit {
   myFeeds?: Post[];
 
   constructor(private userService: UserService,
-    private newfeedsService: NewfeedsService) { }
+    private newsfeedService: NewsFeedService) { }
 
   ngOnInit(): void {
     this.initTabsClickEvent();
@@ -25,13 +25,13 @@ export class WallComponent implements OnInit {
   async getWallInfomations(): Promise<void> {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
-      this.currentUser = Object.assign(new User(), await firstValueFrom(this.userService.getById(userID)));
+      this.currentUser = await firstValueFrom(this.userService.getById(userID));
       this.getMyFeeds();
     }
   }
 
   getMyFeeds(): void {
-    this.newfeedsService
+    this.newsfeedService
       .getUserFeeds(this.currentUser.id)
       .subscribe(data =>
         this.myFeeds = data,

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SocialNetworkWebApp.UseCases
 {
-    public class CreatePostWithContentRequest:IRequest<Guid>
+    public class UpdatePostWithContentRequest:IRequest<Guid>
     {
         public PostDTO post{ get; set; }
         public List<ContentDTO> contents { get; set; }

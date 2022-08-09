@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Content } from 'src/app/models/content.model';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
+import { ContentService } from 'src/app/services/content.service';
 import { PostService } from 'src/app/services/post.service';
 import { UploadService } from 'src/app/services/upload.service';
 
@@ -13,11 +15,12 @@ import { UploadService } from 'src/app/services/upload.service';
 export class CreatePostComponent implements OnInit {
   @Input() currentUser: User = new User();
 
-  imageTest?: File;
+  mediaContents: File[] = [];
   caption: string = '';
 
   constructor(private router: Router,
     private postService: PostService,
+    private contentService: ContentService,
     private uploadService: UploadService) { }
 
   ngOnInit(): void {
@@ -29,20 +32,55 @@ export class CreatePostComponent implements OnInit {
   }
 
   createPost(): void {
-    // let newPost = new Post();
-    // newPost.userId = this.currentUser.id;
-    // newPost.caption = this.caption;
+    let newPost = new Post();
+    newPost.userId = this.currentUser.id;
+    newPost.caption = this.caption;
 
-    // this.postService.add(newPost).subscribe(_ => this.router.navigateByUrl(''));
+    let counter =0;
+    this.postService.add(newPost).subscribe(postId => {
 
-    if(this.imageTest)
-    this.uploadService.uploadImage(this.imageTest).subscribe(success=>console.log(success), error => console.error(error)
-    );
+      this.mediaContents.forEach(media =>{
+        let fileExtension = media.name.split('.').pop();
+        let fileName = `media${++counter}.${fileExtension}`;
+
+        let content = new Content();
+        content.postId = postId;
+        content.linkContent = fileName;
+        content.type = 1;
+  
+        this.uploadService.uploadImage(media, fileName, postId+'').subscribe(result=>{
+          this.contentService.add(content).subscribe(
+            success => console.log(success),
+            error => console.error(error)
+          );
+        });
+      });
+
+      this.router.navigateByUrl('');
+    });
+
+    // let contents : Content[] = [];
+    // this.mediaContents.forEach(media =>{
+    //   let fileExtension = media.name.split('.').pop();
+    //   let content = new Content();
+    //   content.linkContent = 'media' + (contents.length + 1) + fileExtension;
+    //   content.type = 1;
+    //   contents.push(content);
+
+    //   this.uploadService.uploadImage(media,)
+    // });
+
+    // newPost.contents = contents;
+
+
+    // if(this.imageTest)
+    // this.uploadService.uploadImage(this.imageTest).subscribe(success=>console.log(success), error => console.error(error)
+    // );
   }
 
   onImageSelected(event: any): void {
     const file = event.target.files[0];
-    this.imageTest = file;
+    this.mediaContents.push(file);
     const wrapper = document.getElementById('image-wrapper');
 
     if (file) {

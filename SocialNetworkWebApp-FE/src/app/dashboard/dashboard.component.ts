@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
       this.userService
         .getById(userID)
         .subscribe(data =>
-          this.user = Object.assign(new User, data),
+          this.user = data,
           error => console.log(error));
     }
   }

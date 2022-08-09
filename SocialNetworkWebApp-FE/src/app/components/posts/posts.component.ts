@@ -38,7 +38,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
       this.userService
         .getById(this.postData.userId)
         .subscribe(data =>
-          this.postOwner = Object.assign(new User, data),
+          this.postOwner = data,
           error => console.log(error));
     }
   }

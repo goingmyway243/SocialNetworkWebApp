@@ -11,11 +11,11 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  uploadImage(file: File, folderName?: string): Observable<string> {
+  uploadImage(file: File, fileName:string, folderName?: string): Observable<string> {
     let postUrl = folderName ? `${this.apiUrl}/${folderName}` : this.apiUrl;
 
     let formData = new FormData();
-    formData.append("Image",file,file.name);
+    formData.append("Image",file,fileName);
 
     return this.http.post<string>(postUrl, formData);
   }

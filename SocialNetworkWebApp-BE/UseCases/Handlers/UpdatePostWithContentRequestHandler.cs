@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkWebApp.UseCases.Handlers
 {
-    public class CreatePostWithContentRequestHandler : IRequestHandler<CreatePostWithContentRequest, Guid>
+    public class UpdatePostWithContentRequestHandler : IRequestHandler<UpdatePostWithContentRequest, Guid>
     {
         private readonly IRepository<PostEntity> _postRepo;
         private readonly IMapper _autoMapper;
 
-        public CreatePostWithContentRequestHandler(
+        public UpdatePostWithContentRequestHandler(
             IRepository<PostEntity> postRepo,
             IMapper autoMapper)
         {
@@ -22,13 +22,13 @@ namespace SocialNetworkWebApp.UseCases.Handlers
             _autoMapper = autoMapper;
         }
 
-        public async Task<Guid> Handle(CreatePostWithContentRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(UpdatePostWithContentRequest request, CancellationToken cancellationToken)
         {
-            var newPost = _autoMapper.Map<PostEntity>(request.post);
-            newPost.Contents = request.contents.Select(dto => _autoMapper.Map<ContentEntity>(dto)).ToList();
-            await _postRepo.Create(newPost);
+            var postToUpdate = _autoMapper.Map<PostEntity>(request.post);
+            postToUpdate.Contents = request.contents.Select(dto => _autoMapper.Map<ContentEntity>(dto)).ToList();
+            await _postRepo.Update(postToUpdate);
 
-            return newPost.Id;
+            return postToUpdate.Id;
         }
     }
 }

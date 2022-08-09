@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AppComponent } from '../app.component';
 import { Post } from '../models/post.model';
 
@@ -18,7 +18,7 @@ export class PostService {
 
   getById(id: string): Observable<Post> {
     let getUrl = `${this.apiUrl}/${id}`;
-    return this.http.get<Post>(getUrl);
+    return this.http.get(getUrl).pipe(map(data => Object.assign(new Post(), data)));
   }
 
   add(post: Post): Observable<string> {
