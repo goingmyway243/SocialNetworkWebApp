@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { Content } from 'src/app/models/content.model';
 import { Post } from 'src/app/models/post.model';
@@ -15,10 +15,11 @@ export class PostsComponent implements OnInit, AfterViewInit {
   postOwner: User = new User();
   captionArray?: string[];
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private elementRef: ElementRef,
+    private userService: UserService) { }
 
   ngOnInit(): void {
-    this.initEditButtonsClickEvent();
     this.convertPostData();
   }
 
@@ -52,7 +53,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
       let length = this.postData.contents.length;
 
       if (length > 1) {
-        const wrapper = document.querySelector('.photo') as HTMLElement;
+        const wrapper = this.elementRef.nativeElement.querySelector('.photo') as HTMLElement;
         const images = wrapper.querySelectorAll('.photo img');
 
         wrapper.style.display = 'flex';
@@ -64,13 +65,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  initEditButtonsClickEvent(): void {
-    const ellipsis = document.querySelector('.edit .ellipsis');
-    const popup = document.querySelector('.edit .edit-popup') as HTMLElement;
+  onEllipsisButtonClick(): void {
+    const popup = this.elementRef.nativeElement.querySelector('.edit .edit-popup');
 
-    ellipsis?.addEventListener('click', () => {
+    if (popup) {
       let visible = popup.style.display && popup.style.display !== 'none';
       popup.style.display = visible ? 'none' : 'block';
-    });
+    }
   }
 }

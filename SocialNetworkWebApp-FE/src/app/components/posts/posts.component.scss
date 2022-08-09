@@ -31,10 +31,16 @@
 
     .photo {
         gap: 0.2rem;
-        border-radius: var(--card-border-radius);
         overflow: hidden;
         margin: 0.7rem 0;
         position: relative;
+        max-height: 25rem;
+        display: block;
+        border-radius: var(--card-border-radius);
+
+        img {
+            border-radius: var(--card-border-radius);
+        }
     }
 
     .action-buttons {
@@ -133,8 +139,4 @@
 
 .harsh-tag {
     color: var(--color-primary);
-}
-
-.photo {
-    max-height: 25rem;
 }

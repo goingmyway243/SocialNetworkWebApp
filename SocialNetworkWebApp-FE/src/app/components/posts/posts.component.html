@@ -10,10 +10,11 @@
             </div>
         </div>
         <span class="edit">
-            <div class="ellipsis"><i class="uil uil-ellipsis-h"></i></div>
-            <div class="edit-popup">
-                <div class="edit-buttons"><i class="uil uil-pen"></i>Edit</div>
-                <div class="edit-buttons"><i class="uil uil-trash-alt"></i>Delete</div>
+            <div class="ellipsis" id="ellipsisButton" (click)="onEllipsisButtonClick()"><i
+                    class="uil uil-ellipsis-h"></i></div>
+            <div class="edit-popup" id="editPopup">
+                <div class="edit-buttons" id="editButton"><i class="uil uil-pen"></i>Edit</div>
+                <div class="edit-buttons" id="deleteButton"><i class="uil uil-trash-alt"></i>Delete</div>
             </div>
         </span>
     </div>
