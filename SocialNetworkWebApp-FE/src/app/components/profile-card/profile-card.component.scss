@@ -1,0 +1,30 @@
+@import url('../styles.scss');
+
+.card {
+    display: flex;
+    border-radius: var(--card-border-radius);
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    justify-content: space-between;
+    align-items: center;
+
+    .profile {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1rem;
+
+        .text-muted {
+            font-size: 0.85rem;
+        }
+    }
+}
+
+.btn {
+    background-color: var(--color-light);
+    border-radius: 50%;
+    padding: 0.3rem 0.5rem;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    font-weight: 500;
+}

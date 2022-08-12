@@ -40,6 +40,15 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
+  explore(evt: any) {
+    const keyword = evt.target.value;
+    evt.target.value = '';
+
+    if (keyword) {
+      this.router.navigateByUrl('home/search/' + keyword);
+    }
+  }
+
   initElementsClickEvent(): void {
     const bell = document.querySelector('.notification') as HTMLElement;
     const popup = document.querySelector('.notification-popup') as HTMLElement;

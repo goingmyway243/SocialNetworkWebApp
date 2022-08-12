@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { CreatePostComponent } from 'src/app/components/create-post/create-post.component';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
 import { NewsFeedService } from 'src/app/services/newfeeds.service';
@@ -8,11 +9,13 @@ import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-explore',
-  templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.scss']
+  selector: 'app-newsfeed',
+  templateUrl: './newsfeed.component.html',
+  styleUrls: ['./newsfeed.component.scss']
 })
-export class ExploreComponent implements OnInit {
+export class NewsfeedComponent implements OnInit {
+  @ViewChild(CreatePostComponent) createPost?: CreatePostComponent;
+
   currentUser: User = new User();
   newFeeds?: Post[];
 
@@ -28,7 +31,16 @@ export class ExploreComponent implements OnInit {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
+      this.getNewFeeds();
     }
+  }
+
+  getNewFeeds(): void {
+    this.newsfeedService
+      .getUserFeeds(this.currentUser.id)
+      .subscribe(data =>
+        this.newFeeds = data,
+        error => console.log(error));
   }
 
   logout(): void {

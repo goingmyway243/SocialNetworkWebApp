@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 
 
 
@@ -13,7 +14,8 @@ import { ComponentsModule } from '../components/components.module';
   declarations: [
     ExploreComponent,
     WallComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewsfeedComponent
   ],
   imports: [
     CommonModule,

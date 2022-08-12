@@ -2,13 +2,23 @@
     <div class="container">
         <!-- ===================== LEFT =========================== -->
         <div class="left">
-            <app-sidebar [currentUser]="this.currentUser" (onSettingClick)="showSettings($event)"></app-sidebar>
+            <app-sidebar [showCreatePost]="true" [currentUser]="this.currentUser"
+                (onSettingClick)="showSettings($event)" (onCreatePostClick)="createPost?.showCreatePost()">
+            </app-sidebar>
         </div>
 
         <!-- ===================== MIDDLE =========================== -->
         <div class="middle">
             <div class="tab-home">
-                <app-profile-card></app-profile-card>
+                <!------------------- Stories ---------------------->
+                <!-- <app-stories [currentUser]="this.currentUser"></app-stories> -->
+                <!------------------------- Post --------------------->
+                <app-create-post [currentUser]="this.currentUser"></app-create-post>
+
+                <!------------------ Feeds ------------------------->
+                <div class="feeds">
+                    <app-posts *ngFor="let feed of this.newFeeds" [postData]="feed"></app-posts>
+                </div>
             </div>
 
             <div class="tab-settings">

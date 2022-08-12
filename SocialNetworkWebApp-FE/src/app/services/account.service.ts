@@ -15,4 +15,8 @@ export class AccountService {
     return this.http.post<string>(this.apiUrl, { Email: email, Password: password }, AppComponent.httpOptions);
   }
 
+  generateDefaultAvatar(userId: string): Observable<boolean> {
+    let postUrl = this.apiUrl + `/${userId}`;
+    return this.http.post<boolean>(postUrl, AppComponent.httpOptions);
+  }
 }

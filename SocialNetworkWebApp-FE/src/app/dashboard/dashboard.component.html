@@ -6,7 +6,8 @@
             <h2 class="logo" (click)="navigateToDashboard()">Nsocial</h2>
             <div class="search-bar">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Search for creators, inspirations, and projects">
+                <input type="search" placeholder="Search for creators, inspirations, and projects"
+                    (search)="explore($event)">
             </div>
             <div class="menu-bar">
                 <div class="notification">

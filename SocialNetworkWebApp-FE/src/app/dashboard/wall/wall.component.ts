@@ -59,12 +59,12 @@ export class WallComponent implements OnInit {
         friendsLayout.style.display = 'none';
         imagesLayout.style.display = 'none';
 
-        if (tab.id == 'tab-posts') {
+        if (tab.id === 'tab-posts') {
           postsLayout.style.display = 'grid';
-        } else if (tab.id == 'tab-friends') {
+        } else if (tab.id === 'tab-friends') {
           friendsLayout.style.display = 'block';
         }
-        else if (tab.id == 'tab-images') {
+        else if (tab.id === 'tab-images') {
           imagesLayout.style.display = 'block';
         }
       });

@@ -8,8 +8,10 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  @Input() showCreatePost: boolean = false;
   @Input() currentUser: User = new User();
   @Output() onSettingClick: EventEmitter<boolean> = new EventEmitter();
+  @Output() onCreatePostClick: EventEmitter<void> = new EventEmitter();
 
   root: HTMLElement = document.querySelector(':root') as HTMLElement;
 
@@ -32,6 +34,10 @@ export class SidebarComponent implements OnInit {
     this.onSettingClick.emit(show);
   }
 
+  createPost(): void {
+    this.onCreatePostClick.emit();
+  }
+
   initMenuItemsClickEvent(): void {
     const menuItems = document.querySelectorAll('.menu-item');
 
@@ -43,7 +49,7 @@ export class SidebarComponent implements OnInit {
 
     menuItems.forEach(item => {
       item.addEventListener('click', () => {
-        if (item.id == 'home' && item.classList.contains('active')) {
+        if (item.id === 'home' && item.classList.contains('active')) {
           location.reload();
         }
 

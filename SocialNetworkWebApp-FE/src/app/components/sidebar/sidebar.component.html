@@ -6,7 +6,7 @@
         <div class="handle">
             <h4>{{this.currentUser.getFullName()}}</h4>
             <p class="text-muted">
-                @{{this.currentUser.email}}
+                @{{this.currentUser.getEmailPrefix()}}
             </p>
         </div>
     </a>
@@ -32,9 +32,9 @@
             <h3>Settings</h3>
         </a>
     </div>
-    <!-- <label for="create-post" class="btn btn-primary">
+    <label *ngIf="showCreatePost" for="create-post" class="btn btn-primary" (click)="createPost()">
         Create Post
-    </label> -->
+    </label>
 </div>
 
 <div class="customize-theme">

@@ -49,7 +49,7 @@ namespace SocialNetworkWebApp.Controllers
         }
 
         [HttpPost("{folderName}")]
-        public IActionResult UploadImages(string folderName)
+        public IActionResult UploadImageWithFolder(string folderName)
         {
             var result = false;
             try
