@@ -1,16 +1,16 @@
 <div class="card">
     <div class="profile">
         <div class="profile-picture">
-            <img [src]="this.user.getAvatar()" (error)="this.user.getDefaultAvatar()" alt="">
+            <img [src]="this.user.getAvatar()" (click)="navigateToWall()" (error)="this.user.getDefaultAvatar()" alt="">
         </div>
         <div class="info">
-            <div class="text-bold">{{user.getFullName()}}</div>
+            <div class="text-bold" (click)="navigateToWall()">{{user.getFullName()}}</div>
             <div class="text-muted">@{{user.getEmailPrefix()}}</div>
         </div>
     </div>
 
     <div>
-        <span class="btn" (click)="addFriend()"><i class="uil uil-user-plus"></i></span>
+        <span class="btn" (click)="addFriend()"><i [classList]="icons[this.relationIndex]"></i></span>
     </div>
 
 </div>

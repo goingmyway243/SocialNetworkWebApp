@@ -5,8 +5,9 @@ using System.Collections.Generic;
 
 namespace SocialNetworkWebApp.UseCases
 {
-    public class GetAllPostsByUserIdRequest:IRequest<IEnumerable<PostEntity>>
+    public class GetAllPostsByUserIdRequest : IRequest<IEnumerable<PostEntity>>
     {
         public Guid UserId { get; set; }
+        public bool PostedByUserOnly { get; set; }
     }
 }

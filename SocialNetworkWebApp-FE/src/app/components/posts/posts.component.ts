@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { Content } from 'src/app/models/content.model';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
+import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private elementRef: ElementRef,
-    private userService: UserService) { }
+    private router: Router,
+    private userService: UserService,
+    private postService: PostService) { }
 
   ngOnInit(): void {
     this.convertPostData();
@@ -71,6 +75,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
     if (popup) {
       let visible = popup.style.display && popup.style.display !== 'none';
       popup.style.display = visible ? 'none' : 'block';
+    }
+  }
+
+  onDeleteButtonClick(): void {
+    if (this.postData) {
+      this.postService.delete(this.postData.id).subscribe(data => this.router.navigateByUrl(''));
     }
   }
 }

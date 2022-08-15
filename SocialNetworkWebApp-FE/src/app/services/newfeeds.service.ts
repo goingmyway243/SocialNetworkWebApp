@@ -12,8 +12,10 @@ export class NewsFeedService {
 
   constructor(private http: HttpClient) { }
 
-  getUserFeeds(userId: string): Observable<Post[]> {
-    let getUrl = `${this.apiUrl}/${userId}`;
-    return this.http.get<Post[]>(getUrl);
+  getUserFeeds(userId: string, myPostOnly: boolean): Observable<Post[]> {
+    return this.http.post<Post[]>(
+      this.apiUrl,
+      { userId: userId, postedByUserOnly: myPostOnly },
+      AppComponent.httpOptions);
   }
 }

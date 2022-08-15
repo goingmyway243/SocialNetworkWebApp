@@ -32,6 +32,6 @@ export class PostService {
 
   delete(id: string): Observable<string> {
     let deleteUrl = `${this.apiUrl}/${id}`;
-    return this.http.delete<string>(deleteUrl, AppComponent.httpOptions);
+    return this.http.delete<string>(deleteUrl);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
@@ -13,8 +14,11 @@ import { UserService } from 'src/app/services/user.service';
 export class WallComponent implements OnInit {
   currentUser: User = new User();
   myFeeds?: Post[];
+  isMyWall: boolean = true;
 
-  constructor(private userService: UserService,
+  constructor(
+    private activedRoute: ActivatedRoute,
+    private userService: UserService,
     private newsfeedService: NewsFeedService) { }
 
   ngOnInit(): void {
@@ -23,7 +27,10 @@ export class WallComponent implements OnInit {
   }
 
   async getWallInfomations(): Promise<void> {
-    let userID = localStorage.getItem('authorizeToken');
+    let userID = this.activedRoute.snapshot.paramMap.get('userId');
+    this.isMyWall = userID == null;
+    userID = this.isMyWall ? localStorage.getItem('authorizeToken') : userID;
+
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
       this.getMyFeeds();
@@ -32,7 +39,7 @@ export class WallComponent implements OnInit {
 
   getMyFeeds(): void {
     this.newsfeedService
-      .getUserFeeds(this.currentUser.id)
+      .getUserFeeds(this.currentUser.id, true)
       .subscribe(data =>
         this.myFeeds = data,
         error => console.log(error));

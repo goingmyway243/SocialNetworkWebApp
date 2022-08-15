@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
@@ -16,8 +17,11 @@ export class ProfileCardComponent implements OnInit {
 
   icons: string[] = ['uil uil-user-plus', 'uil uil-user-exclamation', 'uil uil-user-check'];
   friendship: Friendship = new Friendship();
+  relationIndex = 0;
 
-  constructor(private friendshipService: FriendshipService,
+  constructor(
+    private router: Router,
+    private friendshipService: FriendshipService,
     private relationService: RelationService) { }
 
   ngOnInit(): void {
@@ -30,7 +34,11 @@ export class ProfileCardComponent implements OnInit {
 
   async getRelationship(): Promise<void> {
     if (this.currentUser && this.user) {
-      this.friendship = await lastValueFrom(this.relationService.getRelationshipBetweenUsers(this.user.id, this.currentUser.id));
+      this.friendship = await lastValueFrom(
+        this.relationService.getRelationshipBetweenUsers(
+          this.user.id, this.currentUser.id));
+
+      this.relationIndex = this.friendship.status ? this.friendship.status : 0;
     }
   }
 
@@ -42,6 +50,12 @@ export class ProfileCardComponent implements OnInit {
       friendship.friendId = this.user.id;
 
       this.friendshipService.add(friendship).subscribe(data => console.log(data));
+    }
+  }
+
+  navigateToWall(): void {
+    if (this.currentUser) {
+      this.router.navigateByUrl(`home/wall/${this.user.id}`)
     }
   }
 }

@@ -30,6 +30,7 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule)
       },
       { path: 'wall', component: WallComponent },
+      { path: 'wall/:userId', component: WallComponent },
       { path: 'search/:keyword', component: ExploreComponent }
     ]
   }

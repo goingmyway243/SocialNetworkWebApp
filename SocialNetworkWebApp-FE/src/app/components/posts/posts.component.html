@@ -14,7 +14,9 @@
                     class="uil uil-ellipsis-h"></i></div>
             <div class="edit-popup" id="editPopup">
                 <div class="edit-buttons" id="editButton"><i class="uil uil-pen"></i>Edit</div>
-                <div class="edit-buttons" id="deleteButton"><i class="uil uil-trash-alt"></i>Delete</div>
+                <div class="edit-buttons" id="deleteButton" (click)="onDeleteButtonClick()">
+                    <i class="uil uil-trash-alt"></i>Delete
+                </div>
             </div>
         </span>
     </div>

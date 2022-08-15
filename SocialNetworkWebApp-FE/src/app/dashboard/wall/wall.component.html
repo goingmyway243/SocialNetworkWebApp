@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="friend-request">
+            <div class="friend-request" *ngIf="!isMyWall">
                 <div class="request">
                     <button class="btn btn-primary">
                         <i class="uil uil-user-plus"></i>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="my-posts">
-                <app-create-post [currentUser]="this.currentUser"></app-create-post>
+                <app-create-post *ngIf="isMyWall" [currentUser]="this.currentUser"></app-create-post>
                 <div class="feeds">
                     <app-posts *ngFor="let feed of this.myFeeds" [postData]="feed"></app-posts>
                 </div>

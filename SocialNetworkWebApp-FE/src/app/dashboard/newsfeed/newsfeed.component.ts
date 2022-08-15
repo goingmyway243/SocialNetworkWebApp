@@ -37,7 +37,7 @@ export class NewsfeedComponent implements OnInit {
 
   getNewFeeds(): void {
     this.newsfeedService
-      .getUserFeeds(this.currentUser.id)
+      .getUserFeeds(this.currentUser.id, false)
       .subscribe(data =>
         this.newFeeds = data,
         error => console.log(error));

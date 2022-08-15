@@ -17,10 +17,10 @@ namespace SocialNetworkWebApp.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetUserFeeds(Guid userId)
+        [HttpPost]
+        public async Task<IActionResult> GetUserFeeds(GetAllPostsByUserIdRequest request)
         {
-            return Ok(await _mediator.Send(new GetAllPostsByUserIdRequest { UserId = userId }));
-        } 
+            return Ok(await _mediator.Send(request));
+        }
     }
 }
