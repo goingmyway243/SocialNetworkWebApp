@@ -27,5 +27,10 @@ namespace SocialNetworkWebApp.Models
         public List<ReactEntity> Reacts { get; set; }
         public List<CommentEntity> Comments { get; set; }
         public List<MessageEntity> Messages { get; set; }
+
+        public string GetFullName()
+        {
+            return FirstName + ' ' + LastName;
+        }
     }
 }

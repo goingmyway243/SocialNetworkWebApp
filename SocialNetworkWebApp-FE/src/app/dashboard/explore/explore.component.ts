@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
-import { NewsFeedService } from 'src/app/services/newfeeds.service';
+import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -14,20 +13,30 @@ import Swal from 'sweetalert2';
 })
 export class ExploreComponent implements OnInit {
   currentUser: User = new User();
-  newFeeds?: Post[];
+  searchedUsers: User[] = [];
 
   constructor(private router: Router,
+    private activedRoute: ActivatedRoute,
     private userService: UserService,
-    private newsfeedService: NewsFeedService) { }
+    private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.getHomeInfomations();
+    this.searchUserByKeyword();
   }
 
-  async getHomeInfomations(): Promise<void> {
+  async getUserInformation(): Promise<void> {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
+    }
+  }
+
+  async searchUserByKeyword(): Promise<void> {
+    await this.getUserInformation();
+
+    let keyword = this.activedRoute.snapshot.paramMap.get('keyword');
+    if (keyword) {
+      this.searchService.search(this.currentUser.id, keyword).subscribe(data => this.searchedUsers = data, error => console.log(error));
     }
   }
 

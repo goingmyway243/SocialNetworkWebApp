@@ -35,7 +35,7 @@ namespace SocialNetworkWebApp.Controllers
         {
             string folderPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Images");
             string filePath = Path.Combine(folderPath, "default.jpg");
-            string copyPath = Path.Combine(folderPath, userId + "");
+            string copyPath = Path.Combine(folderPath, userId + ".jpg");
 
             System.IO.File.Copy(filePath, copyPath, true);
 

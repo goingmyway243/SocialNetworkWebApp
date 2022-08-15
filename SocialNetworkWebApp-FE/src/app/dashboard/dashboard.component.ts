@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  explore(evt: any) {
+  search(evt: any) {
     const keyword = evt.target.value;
     evt.target.value = '';
 

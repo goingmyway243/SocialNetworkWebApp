@@ -32,6 +32,8 @@ export class SignUpComponent implements OnInit {
         .add(this.user)
         .subscribe(
           data => {
+            this.accountService.generateDefaultAvatar(data).subscribe();
+
             Swal.fire({
               position: 'top-end',
               icon: 'success',
