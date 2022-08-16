@@ -8,7 +8,7 @@ import { Friendship } from '../models/friendship.model';
   providedIn: 'root'
 })
 export class RelationService {
-  private apiUrl: string = AppComponent.baseUrl + 'api/Search';
+  private apiUrl: string = AppComponent.baseUrl + 'api/Relation';
 
   constructor(private http: HttpClient) { }
 

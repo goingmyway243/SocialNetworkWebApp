@@ -64,8 +64,6 @@ export class NewsfeedComponent implements OnInit {
   }
 
   showSettings(show: boolean): void {
-    console.log(true);
-
     const tabHome = document.querySelector('.tab-home') as HTMLElement;
     const tabSettings = document.querySelector('.tab-settings') as HTMLElement;
 

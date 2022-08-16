@@ -106,16 +106,14 @@ body {
             }
         }
 
-        .request {
+        .request,
+        .friend,
+        .pending {
             display: block;
         }
 
-        .friend {
-            display: none;
-        }
-
-        .pending {
-            display: none;
+        .confirm {
+            display: flex;
             gap: 1rem;
 
             .btn {

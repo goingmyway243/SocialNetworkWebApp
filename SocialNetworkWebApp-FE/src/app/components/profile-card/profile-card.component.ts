@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
 import { FriendshipService } from 'src/app/services/friendship.service';
@@ -16,7 +16,7 @@ export class ProfileCardComponent implements OnInit {
   @Input() user: User = new User();
 
   icons: string[] = ['uil uil-user-plus', 'uil uil-user-exclamation', 'uil uil-user-check'];
-  friendship: Friendship = new Friendship();
+  friendship?: Friendship;
   relationIndex = 0;
 
   constructor(
@@ -34,22 +34,43 @@ export class ProfileCardComponent implements OnInit {
 
   async getRelationship(): Promise<void> {
     if (this.currentUser && this.user) {
-      this.friendship = await lastValueFrom(
+      this.friendship = await firstValueFrom(
         this.relationService.getRelationshipBetweenUsers(
           this.user.id, this.currentUser.id));
 
-      this.relationIndex = this.friendship.status ? this.friendship.status : 0;
+      this.relationIndex = this.friendship.status !== null ? (this.friendship.status + 1) : 0;
+    }
+  }
+
+  onAddFriendButtonClick(): void {
+    switch (this.relationIndex) {
+      case 0: {
+        this.addFriend();
+        break;
+      }
+      case 1:
+      case 2: {
+        this.unFriend();
+        break;
+      }
+      default: break;
     }
   }
 
   addFriend(): void {
     if (this.currentUser) {
-      let friendship = new Friendship();
-      friendship.status = 0;
-      friendship.userId = this.currentUser.id;
-      friendship.friendId = this.user.id;
+      let newFriendship = new Friendship();
+      newFriendship.status = 0;
+      newFriendship.userId = this.currentUser.id;
+      newFriendship.friendId = this.user.id;
 
-      this.friendshipService.add(friendship).subscribe(data => console.log(data));
+      this.friendshipService.add(newFriendship).subscribe(data => this.relationIndex = 1);
+    }
+  }
+
+  unFriend(): void {
+    if (this.friendship) {
+      this.friendshipService.delete(this.friendship.id).subscribe(data => this.relationIndex = 0);
     }
   }
 

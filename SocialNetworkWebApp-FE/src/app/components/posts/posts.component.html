@@ -2,14 +2,15 @@
     <div class="head">
         <div class="user">
             <div class="profile-picture">
-                <img [src]="this.postOwner.getAvatar()" (error)="this.postOwner.getDefaultAvatar()" alt="">
+                <img [src]="this.postOwner.getAvatar()" (click)="navigateToWall()"
+                    (error)="this.postOwner.getDefaultAvatar()" alt="">
             </div>
             <div class="ingo">
                 <h3>{{this.postOwner.getFullName()}}</h3>
                 <small class="text-muted">{{this.postData.getTimeDiff()}}</small>
             </div>
         </div>
-        <span class="edit">
+        <span class="edit" *ngIf="postOwner.id === currentUser.id">
             <div class="ellipsis" id="ellipsisButton" (click)="onEllipsisButtonClick()"><i
                     class="uil uil-ellipsis-h"></i></div>
             <div class="edit-popup" id="editPopup">
@@ -31,23 +32,55 @@
 
     <div class="action-buttons">
         <div class="interaction-buttons">
-            <span><i class="uil uil-thumbs-up"></i></span>
-            <span><i class="uil uil-comment-alt-dots"></i></span>
+            <span (click)="onLikeButtonClick()"><i class="uil uil-thumbs-up"
+                    [ngClass]="{'liked': userReact}"></i></span>
+            <span (click)="onCommentButtonClick()"><i class="uil uil-comment-alt-dots"></i></span>
             <span><i class="uil uil-share"></i></span>
         </div>
+
         <div class="bookmark">
+            <span class="comment-count text-muted">
+                1 comment
+            </span>
             <span><i class="uil uil-bookmark-full"></i></span>
         </div>
     </div>
 
     <div class="liked-by">
-        <span><img src="https://i.pinimg.com/736x/a6/61/f4/a661f414ac9a447b953338b2c953bb38.jpg" alt=""></span>
-        <span><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt=""></span>
-        <span><img
-                src="https://guantanamocity.org/wp-content/uploads/2020/12/tong-hop-avatar-anime-avatar-anime-doi-cool-ngau-cute-panda-brown-1.jpg"
-                alt=""></span>
-        <p>Liked by <b>Wibu</b> and <b>2,333 others</b></p>
+        <div>
+            <!-- <span><img src="https://i.pinimg.com/736x/a6/61/f4/a661f414ac9a447b953338b2c953bb38.jpg" alt=""></span>
+            <span><img src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" alt=""></span>
+            <span><img
+                    src="https://guantanamocity.org/wp-content/uploads/2020/12/tong-hop-avatar-anime-avatar-anime-doi-cool-ngau-cute-panda-brown-1.jpg"
+                    alt=""></span> -->
+            <p class="text-muted text-bold">{{this.likedByString}}</p>
+        </div>
     </div>
 
-    <div class="comments text-muted">View all 69 comments</div>
+    <div class="comments-container">
+        <div class="list-comments">
+            <div>
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                </div>
+            </div>
+
+            <span>
+                <div class="text-bold">Dang</div>
+                <div>Hello Guys</div>
+            </span>
+        </div>
+
+        <div class="create-comment">
+            <div>
+                <div class="profile-picture" (click)="navigateToWall()">
+                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                </div>
+            </div>
+
+            <input type="text" placeholder="Write your comment..." [value]="comment">
+        </div>
+    </div>
+
+    <div hidden class="comments text-muted">View all 69 comments</div>
 </div>

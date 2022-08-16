@@ -102,6 +102,12 @@ img {
     }
 }
 
+.message {
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 .logo {
     cursor: pointer;
     transition: all 300ms ease;
@@ -110,6 +116,7 @@ img {
 
 .bell:hover,
 .logo:hover,
+.message:hover,
 .profile-picture:hover {
     opacity: 0.75;
 }

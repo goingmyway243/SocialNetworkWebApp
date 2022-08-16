@@ -22,5 +22,11 @@ namespace SocialNetworkWebApp.Controllers
         {
             return Ok(await _mediator.Send(request));
         }
+
+        [HttpGet("{postId}")]
+        public async Task<IActionResult> GetUserFeeds(Guid postId)
+        {
+            return Ok(await _mediator.Send(new GetAllReactsByPostIdRequest { PostId = postId }));
+        }
     }
 }

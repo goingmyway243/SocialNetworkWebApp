@@ -17,7 +17,8 @@
 
                 <!------------------ Feeds ------------------------->
                 <div class="feeds">
-                    <app-posts *ngFor="let feed of this.newFeeds" [postData]="feed"></app-posts>
+                    <app-posts *ngFor="let feed of this.newFeeds" [currentUser]="this.currentUser" [postData]="feed">
+                    </app-posts>
                 </div>
             </div>
 
@@ -39,7 +40,10 @@
             <app-messages></app-messages>
 
             <!-- FRIEND REQUESTS -->
-            <app-requests></app-requests>
+            <div class="friend-requests">
+                <h4>Requests</h4>
+                <app-requests></app-requests>
+            </div>
         </div>
     </div>
 </body>
