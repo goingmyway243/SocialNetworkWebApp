@@ -23,7 +23,7 @@ namespace SocialNetworkWebApp.UseCases.Handlers
 
         public async Task<IEnumerable<PostEntity>> Handle(GetAllPostsByUserIdRequest request, CancellationToken cancellationToken)
         {
-            var newsfeed = new List<PostEntity>();
+            var postsOfEachPage = 10;
 
             var listFriendIds = new List<Guid>();
             listFriendIds.Add(request.UserId);
@@ -39,14 +39,14 @@ namespace SocialNetworkWebApp.UseCases.Handlers
                     });
             }
 
-            var listPosts = await _dbContext.Posts
+            return await _dbContext.Posts
                 .Where(post => listFriendIds.Contains(post.UserId))
+                .OrderByDescending(post => post.CreatedTime)
+                .Skip(postsOfEachPage * request.Paging)
+                .Take(postsOfEachPage)
                 .Include(post => post.Contents)
+                .Include(post => post.Reacts)
                 .ToListAsync();
-
-            newsfeed.AddRange(listPosts);
-
-            return newsfeed.OrderByDescending(post => post.CreatedTime);
         }
     }
 }

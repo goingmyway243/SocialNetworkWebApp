@@ -19,6 +19,8 @@ export class NewsfeedComponent implements OnInit {
   currentUser: User = new User();
   newFeeds?: Post[];
 
+  paging: number = 0;
+
   constructor(private router: Router,
     private userService: UserService,
     private newsfeedService: NewsFeedService) { }
@@ -37,7 +39,7 @@ export class NewsfeedComponent implements OnInit {
 
   getNewFeeds(): void {
     this.newsfeedService
-      .getUserFeeds(this.currentUser.id, false)
+      .getUserFeeds(this.currentUser.id, this.paging, false)
       .subscribe(data =>
         this.newFeeds = data,
         error => console.log(error));

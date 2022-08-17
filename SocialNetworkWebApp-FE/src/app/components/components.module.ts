@@ -8,6 +8,7 @@ import { StoriesComponent } from './stories/stories.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RequestsComponent } from './requests/requests.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -19,7 +20,8 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
     StoriesComponent,
     MessagesComponent,
     RequestsComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
     MessagesComponent,
     RequestsComponent,
     StoriesComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    CommentComponent
   ]
 })
 export class ComponentsModule { }

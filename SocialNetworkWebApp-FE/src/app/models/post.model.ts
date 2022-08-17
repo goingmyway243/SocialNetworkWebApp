@@ -1,5 +1,7 @@
 import { Util } from '../helpers/util';
+import { Comment } from './comment.model';
 import { Content } from './content.model';
+import { React } from './react.model';
 import { User } from './user.model';
 
 export class Post {
@@ -11,6 +13,8 @@ export class Post {
     updatedTime: Date;
 
     contents?: Content[];
+    reacts?: React[];
+    comments?: Comment[];
     user?: User;
 
     constructor(id = '', caption = '', userId = '', createdTime = new Date(), updatedTime = new Date()) {

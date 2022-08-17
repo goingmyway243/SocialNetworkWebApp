@@ -8,5 +8,6 @@ namespace SocialNetworkWebApp.UseCases
     public class GetAllCommentsByPostIdRequest : IRequest<IEnumerable<CommentEntity>>
     {
         public Guid PostId { get; set; }
+        public int Paging { get; set; }
     }
 }

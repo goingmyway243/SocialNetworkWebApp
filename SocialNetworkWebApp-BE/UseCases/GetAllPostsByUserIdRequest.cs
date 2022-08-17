@@ -9,5 +9,6 @@ namespace SocialNetworkWebApp.UseCases
     {
         public Guid UserId { get; set; }
         public bool PostedByUserOnly { get; set; }
+        public int Paging { get; set; }
     }
 }

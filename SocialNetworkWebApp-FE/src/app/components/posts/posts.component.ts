@@ -7,6 +7,7 @@ import { Content } from 'src/app/models/content.model';
 import { Post } from 'src/app/models/post.model';
 import { React } from 'src/app/models/react.model';
 import { User } from 'src/app/models/user.model';
+import { AdditionalService } from 'src/app/services/additional.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { PostService } from 'src/app/services/post.service';
@@ -22,13 +23,17 @@ export class PostsComponent implements OnInit, AfterViewInit {
   @Input() postData?: Post;
   @Input() currentUser!: User;
   postOwner: User = new User();
-  postReacts: React[] = [];
-  postComments: Comment[] = [];
+
   captionArray?: string[];
 
   likedByString: string = '';
   userReact?: React;
   comment: string = '';
+
+  commentPaging: number = 0;
+  commentSize: number = 1;
+
+  commentCountString: string = '';
 
   constructor(
     private elementRef: ElementRef,
@@ -37,11 +42,14 @@ export class PostsComponent implements OnInit, AfterViewInit {
     private postService: PostService,
     private reactService: ReactService,
     private newsfeedService: NewsFeedService,
-    private commentService: CommentService) { }
+    private commentService: CommentService,
+    private additionalService: AdditionalService) { }
 
   ngOnInit(): void {
     this.convertPostData();
-    this.getPostReacts();
+    this.getPostOwner();
+    this.getPostReacts(false);
+    this.getPostComments(this.commentSize);
   }
 
   ngAfterViewInit(): void {
@@ -51,8 +59,6 @@ export class PostsComponent implements OnInit, AfterViewInit {
   convertPostData(): void {
     this.postData = Object.assign(new Post(), this.postData);
     this.captionArray = this.postData.caption.split('\n');
-
-    this.getPostOwner();
   }
 
   getPostOwner(): void {
@@ -65,15 +71,18 @@ export class PostsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async getPostReacts(): Promise<void> {
+  async getPostReacts(update: boolean): Promise<void> {
     if (this.postData) {
-      this.postReacts = await lastValueFrom(this.newsfeedService.getPostReacts(this.postData.id));
-      this.userReact = this.postReacts.find(react => react.userId == this.currentUser!.id);
+      if (update) {
+        this.postData.reacts = await lastValueFrom(this.newsfeedService.getPostReacts(this.postData.id));
+      }
 
-      let length = this.postReacts.length;
+      this.userReact = this.postData.reacts!.find(react => react.userId == this.currentUser!.id);
+
+      let length = this.postData.reacts!.length;
 
       if (length > 0) {
-        let otherUser = await firstValueFrom(this.userService.getById(this.postReacts[0].userId));
+        let otherUser = await firstValueFrom(this.userService.getById(this.postData.reacts![0].userId));
         this.likedByString = this.userReact ? 'Liked by you' : `Liked by ${otherUser.getFullName()}`;
 
         if (length == 2) {
@@ -88,9 +97,30 @@ export class PostsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async getPostComments(): Promise<void> {
+  async getPostComments(size: number): Promise<void> {
     if (this.postData) {
-      // this.postComments = await lastValueFrom(this.newsfeedService.getPostReacts(this.postData.id));
+      this.postData.comments = await lastValueFrom(this.newsfeedService.getPostComments(this.postData.id, this.commentPaging));
+
+      if (size > 0 && size < 10 && this.postData.comments.length > 0) {
+        this.postData.comments = this.postData.comments.slice(-size);
+      }
+
+      this.getCommentCount();
+    }
+  }
+
+  async getCommentCount(): Promise<void> {
+    if (this.postData) {
+      let commentCount = await lastValueFrom(this.additionalService.getTotalComments(this.postData.id));
+
+      if (commentCount <= 0) {
+        this.commentCountString = '';
+      }
+      else if (commentCount == 1) {
+        this.commentCountString = '1 comment';
+      } else if (commentCount > 1) {
+        this.commentCountString = `${commentCount} comments`;
+      }
     }
   }
 
@@ -122,7 +152,9 @@ export class PostsComponent implements OnInit, AfterViewInit {
       newComment.userId = this.currentUser.id;
       newComment.comment = this.comment;
 
-      this.commentService.add(newComment).subscribe();
+      this.comment = '';
+
+      this.commentService.add(newComment).subscribe(success => this.getPostComments(++this.commentSize));
     }
   }
 
@@ -144,7 +176,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   onLikeButtonClick(): void {
     if (this.postData && this.currentUser) {
       if (this.userReact) {
-        this.reactService.delete(this.userReact.id).subscribe(success => this.getPostReacts());
+        this.reactService.delete(this.userReact.id).subscribe(success => this.getPostReacts(true));
       }
       else {
         let react = new React();
@@ -152,7 +184,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
         react.userId = this.currentUser.id;
         react.type = 0;
 
-        this.reactService.add(react).subscribe(success => this.getPostReacts());
+        this.reactService.add(react).subscribe(success => this.getPostReacts(true));
       }
     }
   }
@@ -162,12 +194,14 @@ export class PostsComponent implements OnInit, AfterViewInit {
     input.focus();
   }
 
-  navigateToWall(): void {
-    if (this.currentUser && this.currentUser.id === this.postOwner.id) {
+  navigateToWall(userId: string = ''): void {
+    userId = userId ? userId : this.postOwner.id;
+
+    if (this.currentUser && this.currentUser.id === userId) {
       this.router.navigateByUrl('home/wall');
     }
     else {
-      this.router.navigateByUrl(`home/wall/${this.postOwner.id}`);
+      this.router.navigateByUrl(`home/wall/${userId}`);
     }
   }
 }

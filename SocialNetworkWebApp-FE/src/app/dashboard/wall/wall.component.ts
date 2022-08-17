@@ -19,6 +19,7 @@ export class WallComponent implements OnInit {
   myFeeds?: Post[];
   isMyWall: boolean = true;
 
+  paging: number = 0;
   loggedUserId: string = '';
 
   friendship?: Friendship;
@@ -63,7 +64,7 @@ export class WallComponent implements OnInit {
 
   getMyFeeds(): void {
     this.newsfeedService
-      .getUserFeeds(this.currentUser.id, true)
+      .getUserFeeds(this.currentUser.id, this.paging, true)
       .subscribe(data =>
         this.myFeeds = data,
         error => console.log(error));

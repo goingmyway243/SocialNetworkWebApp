@@ -24,9 +24,20 @@ namespace SocialNetworkWebApp.Controllers
         }
 
         [HttpGet("{postId}")]
-        public async Task<IActionResult> GetUserFeeds(Guid postId)
+        public async Task<IActionResult> GetReactsByPostId(Guid postId)
         {
             return Ok(await _mediator.Send(new GetAllReactsByPostIdRequest { PostId = postId }));
+        }
+
+        [HttpPost("{postId}")]
+        public async Task<IActionResult> GetCommentsByPostId(Guid postId, GetAllCommentsByPostIdRequest request)
+        {
+            if (postId != request.PostId)
+            {
+                return BadRequest();
+            }
+
+            return Ok(await _mediator.Send(request));
         }
     }
 }

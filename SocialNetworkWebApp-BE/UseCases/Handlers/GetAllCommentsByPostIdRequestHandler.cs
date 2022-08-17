@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
 using SocialNetworkWebApp.Repositories.Base;
 using System.Collections.Generic;
@@ -10,16 +12,22 @@ namespace SocialNetworkWebApp.UseCases.Handlers
 {
     public class GetAllCommentsByPostIdRequestHandler : IRequestHandler<GetAllCommentsByPostIdRequest, IEnumerable<CommentEntity>>
     {
-        private readonly IRepository<CommentEntity> _repository;
+        private readonly SocialNetworkContext _dbContext;
 
-        public GetAllCommentsByPostIdRequestHandler(IRepository<CommentEntity> repository)
+        public GetAllCommentsByPostIdRequestHandler(SocialNetworkContext dbContext)
         {
-            _repository = repository;
+            _dbContext = dbContext;
         }
         public async Task<IEnumerable<CommentEntity>> Handle(GetAllCommentsByPostIdRequest request, CancellationToken cancellationToken)
         {
-            var listComments = await _repository.GetAll();
-            return listComments.Where(comment => comment.PostId == request.PostId);
+            var commentsOfEachPage = 10;
+            return await _dbContext.Comments
+                .Where(comment => comment.PostId == request.PostId)
+                .OrderBy(comment => comment.CreatedTime)
+                .Skip(commentsOfEachPage * request.Paging)
+                .Take(commentsOfEachPage)
+                .Include(comment => comment.User)
+                .ToListAsync();
         }
     }
 }

@@ -40,9 +40,9 @@
 
         <div class="bookmark">
             <span class="comment-count text-muted">
-                1 comment
+                {{this.commentCountString}}
             </span>
-            <span><i class="uil uil-bookmark-full"></i></span>
+            <span hidden><i class="uil uil-bookmark-full"></i></span>
         </div>
     </div>
 
@@ -58,18 +58,8 @@
     </div>
 
     <div class="comments-container">
-        <div class="list-comments">
-            <div>
-                <div class="profile-picture" (click)="navigateToWall()">
-                    <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
-                </div>
-            </div>
-
-            <span>
-                <div class="text-bold">Dang</div>
-                <div>Hello Guys</div>
-            </span>
-        </div>
+        <app-comment *ngFor="let comment of this.postData.comments" [commentData]="comment"
+            (onAvatarClick)="navigateToWall($event)"></app-comment>
 
         <div class="create-comment">
             <div>
@@ -78,7 +68,9 @@
                 </div>
             </div>
 
-            <input type="text" placeholder="Write your comment..." [value]="comment">
+            <form (submit)="createComment()">
+                <input type="text" placeholder="Write your comment..." name="inputComment" [(ngModel)]="this.comment">
+            </form>
         </div>
     </div>
 
