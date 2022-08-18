@@ -20,4 +20,9 @@ export class RelationService {
   getRelationshipBetweenUsers(userId: string, friendId: string): Observable<Friendship> {
     return this.http.post<Friendship>(this.apiUrl, { userId: userId, friendId: friendId }, AppComponent.httpOptions);
   }
+
+  getFriendRequestByUserId(userId: string): Observable<Friendship[]> {
+    let apiPost = `${this.apiUrl}/${userId}`;
+    return this.http.post<Friendship[]>(apiPost, userId, AppComponent.httpOptions);
+  }
 }

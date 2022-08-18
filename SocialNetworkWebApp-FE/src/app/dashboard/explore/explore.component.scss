@@ -106,6 +106,16 @@ body {
         position: sticky;
         top: var(--sticky-top-right);
         bottom: 0;
+
+        .friend-requests {
+            margin-top: 1rem;
+
+            h4 {
+                color: var(--color-gray);
+                margin-bottom: 1rem;
+                margin-left: 1rem;
+            }
+        }
     }
 }
 

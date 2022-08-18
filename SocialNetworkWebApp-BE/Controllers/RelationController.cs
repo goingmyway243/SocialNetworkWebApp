@@ -29,5 +29,11 @@ namespace SocialNetworkWebApp.Controllers
         {
             return Ok(await _mediator.Send(request));
         }
+
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> GetFriendRequestsByUserId(Guid userId)
+        {
+            return Ok(await _mediator.Send(new GetAllFriendRequestByUserIdRequest { UserId = userId }));
+        }
     }
 }

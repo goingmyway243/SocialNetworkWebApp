@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class FriendCardComponent implements OnInit {
   @Input() friendship!: Friendship;
   @Input() currentUser!: User;
+  @Input() showFriendButton: boolean = true;
 
   user: User = new User();
 

@@ -17,6 +17,7 @@ export class ExploreComponent implements OnInit {
   currentUser: User = new User();
   searchedUsers: User[] = [];
   friends: Friendship[] = [];
+  friendRequests: Friendship[] = [];
 
   constructor(private router: Router,
     private activedRoute: ActivatedRoute,
@@ -32,11 +33,17 @@ export class ExploreComponent implements OnInit {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
+
+      this.getFriendRequests();
     }
   }
 
   getFriends(): void {
     this.relationService.getUserRelationship(this.currentUser.id).subscribe(data => this.friends = data);
+  }
+
+  getFriendRequests(): void {
+    this.relationService.getFriendRequestByUserId(this.currentUser.id).subscribe(data => this.friendRequests = data);
   }
 
   async searchUserByKeyword(): Promise<void> {

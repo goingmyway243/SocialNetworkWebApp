@@ -21,6 +21,7 @@ export class NewsfeedComponent implements OnInit {
   currentUser: User = new User();
   newFeeds: Post[] = [];
   friends: Friendship[] = [];
+  friendRequests: Friendship[] = [];
 
   paging: number = 0;
 
@@ -37,7 +38,9 @@ export class NewsfeedComponent implements OnInit {
     let userID = localStorage.getItem('authorizeToken');
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
+
       this.getNewFeeds();
+      this.getFriendRequests();
     } else {
       this.router.navigateByUrl('');
     }
@@ -55,6 +58,10 @@ export class NewsfeedComponent implements OnInit {
     this.relationService.getUserRelationship(this.currentUser.id).subscribe(data => this.friends = data);
   }
 
+  getFriendRequests(): void {
+    this.relationService.getFriendRequestByUserId(this.currentUser.id).subscribe(data => this.friendRequests = data);
+  }
+
   logout(): void {
     Swal.fire({
       icon: 'question',
@@ -65,11 +72,13 @@ export class NewsfeedComponent implements OnInit {
       focusCancel: true,
       confirmButtonText: 'Yes, log me out',
       cancelButtonText: 'No, stay here',
-      confirmButtonColor: 'var(--color-primary)',
-      cancelButtonColor: 'var(--color-gray)'
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
     }).then(result => {
       if (result.isConfirmed) {
         localStorage.removeItem('authorizeToken');
+
+        console.log(localStorage);
         this.router.navigateByUrl('');
       }
     });

@@ -34,10 +34,14 @@
         </div>
         <!-- ====================== RIGHT ========================== -->
         <div class="right">
-            <app-messages></app-messages>
+            <app-messages [totalRequests]="this.friendRequests.length"></app-messages>
 
             <!-- FRIEND REQUESTS -->
-            <app-requests></app-requests>
+            <div class="friend-requests" *ngIf="this.friendRequests.length>0">
+                <h4>Requests</h4>
+                <app-requests *ngFor="let friendRequest of this.friendRequests" [friendshipData]="friendRequest">
+                </app-requests>
+            </div>
         </div>
     </div>
 </body>

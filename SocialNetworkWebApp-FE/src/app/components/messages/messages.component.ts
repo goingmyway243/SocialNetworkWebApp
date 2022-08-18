@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-messages',
@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
+  @Input() totalRequests: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
     this.initSearchMessageEvent();
+    this.initCategoriesClickEvent();
   }
 
   initSearchMessageEvent(): void {
@@ -29,6 +31,7 @@ export class MessagesComponent implements OnInit {
 
   initCategoriesClickEvent(): void {
     const categories = document.querySelectorAll('.category h6');
+    const listMessages = document.querySelector('.list-messages') as HTMLElement;
 
     const removeActiveCategoryClass = () => {
       categories.forEach(item => {
@@ -40,6 +43,7 @@ export class MessagesComponent implements OnInit {
       item.addEventListener('click', () => {
         removeActiveCategoryClass();
         item.classList.add('active');
+        listMessages.style.display = item.id === 'requests' ? 'none' : 'block';
       });
     });
   }

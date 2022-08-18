@@ -9,7 +9,7 @@
                     <div class="info">
                         <div class="name text-bold">{{this.currentUser.getFullName()}}</div>
                         <div class="email text-muted">@{{this.currentUser.getEmailPrefix()}}</div>
-                        <div class="friends">999 Friends</div>
+                        <div class="friends">{{friendCountStr}}</div>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,11 @@
             </div>
         </div>
 
-        <div class="friends-layout"></div>
+        <div class="friends-layout">
+            <app-friend-card *ngFor="let friend of this.friends" [currentUser]="this.currentUser" [friendship]="friend"
+                [showFriendButton]="isMyWall">
+            </app-friend-card>
+        </div>
 
         <div class="images-layout"></div>
     </div>

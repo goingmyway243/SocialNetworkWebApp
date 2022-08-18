@@ -100,27 +100,39 @@ export class SidebarComponent implements OnInit {
           fontSize = '10px';
           this.root.style.setProperty('--sticky-top-left', '5.4rem');
           this.root.style.setProperty('--sticky-top-right', '5.4rem');
+          localStorage.setItem('custom-fontsize', '1');
         } else if (size.classList.contains('font-size-2')) {
           fontSize = '13px';
           this.root.style.setProperty('--sticky-top-left', '5.4rem');
           this.root.style.setProperty('--sticky-top-right', '-7rem');
+          localStorage.setItem('custom-fontsize', '2');
         } else if (size.classList.contains('font-size-3')) {
           fontSize = '16px';
           this.root.style.setProperty('--sticky-top-left', '5.4rem');
           this.root.style.setProperty('--sticky-top-right', '-18rem');
+          localStorage.setItem('custom-fontsize', '3');
         } else if (size.classList.contains('font-size-4')) {
           fontSize = '19px';
           this.root.style.setProperty('--sticky-top-left', '5.4rem');
           this.root.style.setProperty('--sticky-top-right', '-25rem');
+
+          localStorage.setItem('custom-fontsize', '4');
         } else if (size.classList.contains('font-size-5')) {
           fontSize = '22px';
           this.root.style.setProperty('--sticky-top-left', '5.4rem');
           this.root.style.setProperty('--sticky-top-right', '-35rem');
+          localStorage.setItem('custom-fontsize', '5');
         }
 
         (document.querySelector('html') as HTMLElement).style.fontSize = fontSize;
       });
     });
+
+    const storeValue = localStorage.getItem('custom-fontsize');
+
+    if (storeValue) {
+      (listFontSizes[parseInt(storeValue) - 1] as HTMLElement).click();
+    }
   }
 
   initColorCustomization(): void {
@@ -140,19 +152,30 @@ export class SidebarComponent implements OnInit {
 
         if (color.classList.contains('color-1')) {
           primaryHue = '252';
+          localStorage.setItem('custom-color', '1');
         } else if (color.classList.contains('color-2')) {
           primaryHue = '52';
+          localStorage.setItem('custom-color', '2');
         } else if (color.classList.contains('color-3')) {
           primaryHue = '352';
+          localStorage.setItem('custom-color', '3');
         } else if (color.classList.contains('color-4')) {
           primaryHue = '152';
+          localStorage.setItem('custom-color', '4');
         } else if (color.classList.contains('color-5')) {
           primaryHue = '202';
+          localStorage.setItem('custom-color', '5');
         }
 
         this.root.style.setProperty('--primary-color-hue', primaryHue);
       });
     });
+
+    const storeValue = localStorage.getItem('custom-color');
+
+    if (storeValue) {
+      (colorPalette[parseInt(storeValue) - 1] as HTMLElement).click();
+    }
   }
 
   initBackgroundCustomization(): void {
@@ -179,6 +202,8 @@ export class SidebarComponent implements OnInit {
 
       bg2.classList.remove('active');
       bg3.classList.remove('active');
+
+      localStorage.setItem('custom-bg', '1');
       changeBG();
     });
 
@@ -191,6 +216,8 @@ export class SidebarComponent implements OnInit {
 
       bg1.classList.remove('active');
       bg3.classList.remove('active');
+
+      localStorage.setItem('custom-bg', '2');
       changeBG();
     });
 
@@ -203,7 +230,28 @@ export class SidebarComponent implements OnInit {
 
       bg2.classList.remove('active');
       bg1.classList.remove('active');
+
+      localStorage.setItem('custom-bg', '3');
       changeBG();
     });
+
+    const storeValue = localStorage.getItem('custom-bg');
+    if (storeValue) {
+      switch (parseInt(storeValue)) {
+        case 1: {
+          bg1.click();
+          break;
+        }
+        case 2: {
+          bg2.click();
+          break;
+        } case 3: {
+          bg3.click();
+          break;
+        }
+        default:
+          break;
+      }
+    }
   }
 }

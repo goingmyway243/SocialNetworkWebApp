@@ -1,22 +1,24 @@
 <div class="request">
     <div class="info">
         <div class="profile-picture">
-            <img src="https://guantanamocity.org/wp-content/uploads/2020/12/tong-hop-avatar-anime-avatar-anime-doi-cool-ngau-cute-panda-brown-1.jpg"
-                alt="">
+            <img [src]="this.user.getAvatar()" (error)="this.user.getDefaultAvatar()" alt="">
         </div>
         <div>
-            <h5>Vtuber</h5>
+            <h4>{{this.user.getFullName()}}</h4>
             <p class="text-muted">
-                8 mutual friends
+                @{{this.user.getEmailPrefix()}}
             </p>
         </div>
     </div>
     <div class="action">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (click)="accept()">
             Accept
         </button>
-        <button class="btn">
+        <button class="btn" (click)="decline()">
             Decline
         </button>
+    </div>
+    <div class="response">
+        Request has been {{this.response}}
     </div>
 </div>

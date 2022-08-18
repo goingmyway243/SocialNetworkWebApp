@@ -5,10 +5,12 @@
         </div>
     </div>
 
-    <span>
-        <div class="text-bold">{{commentData.user!.getFullName()}}</div>
-        <div>{{commentData.comment}}</div>
-    </span>
+    <div class="wrapper">
+        <span>
+            <div class="text-bold">{{commentData.user!.getFullName()}}</div>
+            <div>{{commentData.comment}}</div>
+        </span>
 
-    <h4 class="text-muted">{{timeDiff}}</h4>
+        <h4 class="text-muted">{{timeDiff}}</h4>
+    </div>
 </div>

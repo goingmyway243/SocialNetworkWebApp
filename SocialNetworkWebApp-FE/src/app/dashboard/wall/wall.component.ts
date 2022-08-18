@@ -17,10 +17,12 @@ import { UserService } from 'src/app/services/user.service';
 export class WallComponent implements OnInit {
   currentUser: User = new User();
   myFeeds?: Post[];
+  friends?: Friendship[];
   isMyWall: boolean = true;
 
   paging: number = 0;
   loggedUserId: string = '';
+  friendCountStr: string = '';
 
   friendship?: Friendship;
   relationIndex = 0;
@@ -47,6 +49,7 @@ export class WallComponent implements OnInit {
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
       this.getMyFeeds();
+      this.getFriends();
 
       if (!this.isMyWall) {
         this.getRelationship();
@@ -71,6 +74,19 @@ export class WallComponent implements OnInit {
       .subscribe(data =>
         this.myFeeds = data,
         error => console.log(error));
+  }
+
+  getFriends(): void {
+    this.relationService
+      .getUserRelationship(this.currentUser.id)
+      .subscribe(data => {
+        this.friends = data;
+        this.friendCountStr = this.friends.length + ' friend';
+        if (this.friends.length > 1) {
+          this.friendCountStr += 's';
+        }
+      });
+
   }
 
   addFriend(): void {
@@ -121,7 +137,7 @@ export class WallComponent implements OnInit {
         if (tab.id === 'tab-posts') {
           postsLayout.style.display = 'grid';
         } else if (tab.id === 'tab-friends') {
-          friendsLayout.style.display = 'block';
+          friendsLayout.style.display = 'grid';
         }
         else if (tab.id === 'tab-images') {
           imagesLayout.style.display = 'block';

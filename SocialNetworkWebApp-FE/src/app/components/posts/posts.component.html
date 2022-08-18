@@ -39,7 +39,7 @@
         </div>
 
         <div class="bookmark">
-            <span class="comment-count text-muted">
+            <span class="comment-count text-muted" (click)="getPostCommentsWithPaging()">
                 {{this.commentCountString}}
             </span>
             <span hidden><i class="uil uil-bookmark-full"></i></span>

@@ -187,6 +187,12 @@ body {
     }
 }
 
+.friends-layout {
+    display: none;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+}
+
 @media screen and (max-width: 1200px) {
     .container {
         width: 90%;
