@@ -9,6 +9,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { RequestsComponent } from './requests/requests.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { CommentComponent } from './comment/comment.component';
+import { FriendCardComponent } from './friend-card/friend-card.component';
 
 
 
@@ -21,7 +22,8 @@ import { CommentComponent } from './comment/comment.component';
     MessagesComponent,
     RequestsComponent,
     ProfileCardComponent,
-    CommentComponent
+    CommentComponent,
+    FriendCardComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { CommentComponent } from './comment/comment.component';
     RequestsComponent,
     StoriesComponent,
     ProfileCardComponent,
+    FriendCardComponent,
     CommentComponent
   ]
 })

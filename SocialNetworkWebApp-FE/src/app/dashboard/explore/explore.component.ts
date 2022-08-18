@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
+import { RelationService } from 'src/app/services/relation.service';
 import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
@@ -14,11 +16,13 @@ import Swal from 'sweetalert2';
 export class ExploreComponent implements OnInit {
   currentUser: User = new User();
   searchedUsers: User[] = [];
+  friends: Friendship[] = [];
 
   constructor(private router: Router,
     private activedRoute: ActivatedRoute,
     private userService: UserService,
-    private searchService: SearchService) { }
+    private searchService: SearchService,
+    private relationService: RelationService) { }
 
   ngOnInit(): void {
     this.searchUserByKeyword();
@@ -29,6 +33,10 @@ export class ExploreComponent implements OnInit {
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
     }
+  }
+
+  getFriends(): void {
+    this.relationService.getUserRelationship(this.currentUser.id).subscribe(data => this.friends = data);
   }
 
   async searchUserByKeyword(): Promise<void> {
@@ -60,14 +68,30 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  showSettings(show: boolean): void {
-    console.log(true);
-
+  showTab(tabIndex: number): void {
     const tabHome = document.querySelector('.tab-home') as HTMLElement;
+    const tabFriends = document.querySelector('.tab-friends') as HTMLElement;
     const tabSettings = document.querySelector('.tab-settings') as HTMLElement;
 
-    tabHome.style.display = !show ? 'block' : 'none';
-    tabSettings.style.display = show ? 'block' : 'none';
+    tabHome.style.display = 'none';
+    tabFriends.style.display = 'none';
+    tabSettings.style.display = 'none';
+
+    switch (tabIndex) {
+      case 0: {
+        tabHome.style.display = 'block';
+        break;
+      } case 1: {
+        tabFriends.style.display = 'block';
+        this.getFriends();
+        break;
+      } case 2: {
+        tabSettings.style.display = 'block';
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   navigateToWall(): void {

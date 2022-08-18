@@ -57,6 +57,14 @@ body {
             display: block;
         }
 
+        .tab-friends {
+            display: none;
+
+            h2 {
+                margin-bottom: 1rem;
+            }
+        }
+
         .tab-settings {
             display: none;
             border-radius: var(--card-border-radius);

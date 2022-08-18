@@ -7,7 +7,7 @@
             </div>
             <div class="ingo">
                 <h3>{{this.postOwner.getFullName()}}</h3>
-                <small class="text-muted">{{this.postData.getTimeDiff()}}</small>
+                <small class="text-muted">{{timeDiff}}</small>
             </div>
         </div>
         <span class="edit" *ngIf="postOwner.id === currentUser.id">
@@ -58,6 +58,8 @@
     </div>
 
     <div class="comments-container">
+        <div class="view-more text-muted" *ngIf="canViewMore" (click)="getPostCommentsWithPaging()">View more...</div>
+
         <app-comment *ngFor="let comment of this.postData.comments" [commentData]="comment"
             (onAvatarClick)="navigateToWall($event)"></app-comment>
 
@@ -73,6 +75,4 @@
             </form>
         </div>
     </div>
-
-    <div hidden class="comments text-muted">View all 69 comments</div>
 </div>

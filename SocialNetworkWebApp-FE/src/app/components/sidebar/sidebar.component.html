@@ -11,11 +11,11 @@
         </div>
     </a>
     <div class="side-bar">
-        <a class="menu-item active" (click)="showSettings(false)" id="home">
+        <a class="menu-item active" (click)="showTab(0)" id="home">
             <span><i class="uil uil-house-user"></i></span>
             <h3>Home</h3>
         </a>
-        <a class="menu-item">
+        <a class="menu-item" (click)="showTab(1)">
             <span><i class="uil uil-users-alt"></i></span>
             <h3>Friends</h3>
         </a>
@@ -27,7 +27,7 @@
             <span><i class="uil uil-window"></i></span>
             <h3>Admin</h3>
         </a>
-        <a class="menu-item" (click)="showSettings(true)">
+        <a class="menu-item" (click)="showTab(2)">
             <span><i class="uil uil-setting"></i></span>
             <h3>Settings</h3>
         </a>

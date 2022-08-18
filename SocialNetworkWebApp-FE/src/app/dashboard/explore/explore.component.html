@@ -2,7 +2,7 @@
     <div class="container">
         <!-- ===================== LEFT =========================== -->
         <div class="left">
-            <app-sidebar [currentUser]="this.currentUser" (onSettingClick)="showSettings($event)"></app-sidebar>
+            <app-sidebar [currentUser]="this.currentUser" (onSettingClick)="showTab($event)"></app-sidebar>
         </div>
 
         <!-- ===================== MIDDLE =========================== -->
@@ -11,6 +11,12 @@
                 <div class="no-result" *ngIf="searchedUsers.length < 1">No matching result</div>
                 <app-profile-card *ngFor="let user of searchedUsers" [currentUser]="this.currentUser" [user]="user">
                 </app-profile-card>
+            </div>
+
+            <div class="tab-friends">
+                <h2>Friends: {{this.friends.length}}</h2>
+                <app-friend-card *ngFor="let friend of this.friends" [currentUser]="this.currentUser"
+                    [friendship]="friend"></app-friend-card>
             </div>
 
             <div class="tab-settings">

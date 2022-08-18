@@ -20,7 +20,9 @@ namespace SocialNetworkWebApp.UseCases.Handlers
         public async Task<IEnumerable<FriendshipEntity>> Handle(GetAllRelationshipByUserIdRequest request, CancellationToken cancellationToken)
         {
             var listFriendships = await _repository.GetAll();
-            return listFriendships.Where(friendship => friendship.UserId == request.UserId || friendship.FriendId == request.UserId);
+            return listFriendships.Where(friendship =>
+            (friendship.UserId == request.UserId || friendship.FriendId == request.UserId) &&
+            friendship.Status != FriendshipEntity.FriendStatus.Request);
         }
     }
 }

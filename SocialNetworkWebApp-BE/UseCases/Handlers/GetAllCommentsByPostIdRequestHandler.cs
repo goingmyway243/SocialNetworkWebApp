@@ -23,10 +23,11 @@ namespace SocialNetworkWebApp.UseCases.Handlers
             var commentsOfEachPage = 10;
             return await _dbContext.Comments
                 .Where(comment => comment.PostId == request.PostId)
-                .OrderBy(comment => comment.CreatedTime)
+                .OrderByDescending(comment => comment.CreatedTime)
                 .Skip(commentsOfEachPage * request.Paging)
                 .Take(commentsOfEachPage)
                 .Include(comment => comment.User)
+                .OrderBy(comment => comment.CreatedTime)
                 .ToListAsync();
         }
     }

@@ -25,7 +25,13 @@ export class SignInComponent implements OnInit {
       .login(this.user.email, this.user.password)
       .subscribe(
         data => this.onLoginSuccess(data),
-        error => alert(Util.getHttpErrorMessage(error)));
+        error => Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: Util.getHttpErrorMessage(error),
+          showConfirmButton: false,
+          timer: 1500
+        }));
   }
 
   onLoginSuccess(userID: string): void {

@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="confirm" *ngIf="relationIndex === 1">
-                    <button class="btn btn-primary ">
+                    <button class="btn btn-primary " (click)="acceptFriendRequest()">
                         <i class="uil uil-check"></i>
                         <span>Accept</span>
                     </button>
@@ -39,10 +39,17 @@
                     </button>
                 </div>
 
-                <div class="pending" *ngIf="relationIndex === 3">
-                    <button class="btn btn-primary" (click)="addFriend()">
+                <div class="friend" *ngIf="relationIndex === 3">
+                    <button class="btn btn-primary " (click)="unFriend()">
+                        <i class="uil uil-ban"></i>
+                        <span>Blocked</span>
+                    </button>
+                </div>
+
+                <div class="pending" *ngIf="relationIndex === 4">
+                    <button class="btn btn-primary" (click)="unFriend()">
                         <i class="uil uil-user-exclamation"></i>
-                        <span>Add</span>
+                        <span>Pending</span>
                     </button>
                 </div>
             </div>

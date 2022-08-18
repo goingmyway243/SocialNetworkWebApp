@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/co
 import { Router } from '@angular/router';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
+import { Util } from 'src/app/helpers/util';
 import { Comment } from 'src/app/models/comment.model';
 import { Content } from 'src/app/models/content.model';
 import { Post } from 'src/app/models/post.model';
@@ -35,6 +36,11 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   commentCountString: string = '';
 
+  canViewMore: boolean = false;
+  splitComment: boolean = true;
+
+  timeDiff: string = '';
+
   constructor(
     private elementRef: ElementRef,
     private router: Router,
@@ -47,6 +53,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.convertPostData();
+    this.getTimeDiff();
     this.getPostOwner();
     this.getPostReacts(false);
     this.getPostComments(this.commentSize);
@@ -97,13 +104,39 @@ export class PostsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async getPostComments(size: number): Promise<void> {
+  async getPostComments(size: number = -1): Promise<void> {
     if (this.postData) {
+      this.splitComment = true;
+      this.commentPaging = 0;
+
       this.postData.comments = await lastValueFrom(this.newsfeedService.getPostComments(this.postData.id, this.commentPaging));
 
-      if (size > 0 && size < 10 && this.postData.comments.length > 0) {
-        this.postData.comments = this.postData.comments.slice(-size);
+      this.canViewMore = this.postData.comments.length > size;
+      this.postData.comments = this.postData.comments.slice(-size);
+
+      this.getCommentCount();
+    }
+  }
+
+  async getPostCommentsWithPaging(): Promise<void> {
+    if (this.postData) {
+      let comments = await lastValueFrom(this.newsfeedService.getPostComments(this.postData.id, this.commentPaging));
+
+      if (comments.length == 0) {
+        this.canViewMore = false;
+        return;
       }
+
+      if (this.splitComment) {
+        this.postData.comments = [];
+        this.splitComment = false;
+        this.commentSize = 1;
+      }
+
+      comments = comments.concat(this.postData.comments!);
+      this.postData.comments = comments;
+
+      this.commentPaging++;
 
       this.getCommentCount();
     }
@@ -126,6 +159,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   getFullLinkContent(content: Content): string {
     return AppComponent.baseUrl + 'app-images/' + content.postId + '/' + content.linkContent;
+  }
+
+  getTimeDiff() {
+    if (this.postData) {
+      this.timeDiff = Util.getTimeDiff(this.postData.createdTime);
+    }
   }
 
   handleMultiImages(): void {
@@ -204,4 +243,5 @@ export class PostsComponent implements OnInit, AfterViewInit {
       this.router.navigateByUrl(`home/wall/${userId}`);
     }
   }
+
 }

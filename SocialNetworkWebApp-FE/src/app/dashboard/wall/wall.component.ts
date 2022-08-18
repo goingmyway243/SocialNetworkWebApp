@@ -60,6 +60,9 @@ export class WallComponent implements OnInit {
         this.loggedUserId, this.currentUser.id));
 
     this.relationIndex = this.friendship.status !== null ? (this.friendship.status + 1) : 0;
+    if (this.relationIndex === 1 && this.friendship.friendId === this.currentUser.id) {
+      this.relationIndex = 4;
+    }
   }
 
   getMyFeeds(): void {
@@ -77,7 +80,14 @@ export class WallComponent implements OnInit {
       newFriendship.userId = this.loggedUserId;
       newFriendship.friendId = this.currentUser.id;
 
-      this.friendshipService.add(newFriendship).subscribe(data => this.relationIndex = 1);
+      this.friendshipService.add(newFriendship).subscribe(data => this.getRelationship());
+    }
+  }
+
+  acceptFriendRequest(): void {
+    if (this.friendship && this.friendship.status === 0) {
+      this.friendship.status = 1;
+      this.friendshipService.update(this.friendship).subscribe(data => this.getRelationship());
     }
   }
 

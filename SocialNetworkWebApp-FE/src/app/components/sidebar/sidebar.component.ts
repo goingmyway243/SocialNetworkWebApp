@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user.model';
 export class SidebarComponent implements OnInit {
   @Input() showCreatePost: boolean = false;
   @Input() currentUser: User = new User();
-  @Output() onSettingClick: EventEmitter<boolean> = new EventEmitter();
+  @Output() onSettingClick: EventEmitter<number> = new EventEmitter();
   @Output() onCreatePostClick: EventEmitter<void> = new EventEmitter();
 
   root: HTMLElement = document.querySelector(':root') as HTMLElement;
@@ -30,12 +30,18 @@ export class SidebarComponent implements OnInit {
     this.router.navigateByUrl('/home/wall');
   }
 
-  showSettings(show: boolean): void {
-    this.onSettingClick.emit(show);
+  showTab(tabIndex: number): void {
+    this.onSettingClick.emit(tabIndex);
   }
 
   createPost(): void {
     this.onCreatePostClick.emit();
+
+    const menuItem = document.querySelector('.menu-item.active') as HTMLElement;
+    if (menuItem.id !== 'home') {
+      const menuItemHome = document.querySelector('.menu-item#home') as HTMLElement;
+      menuItemHome.click();
+    }
   }
 
   initMenuItemsClickEvent(): void {

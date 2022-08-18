@@ -35,7 +35,10 @@ namespace SocialNetworkWebApp.UseCases.Handlers
                     .ToList().ForEach(friendship =>
                     {
                         var id = friendship.UserId == request.UserId ? friendship.FriendId : friendship.UserId;
-                        listFriendIds.Add(id);
+                        if (friendship.Status == FriendshipEntity.FriendStatus.Friend)
+                        {
+                            listFriendIds.Add(id);
+                        }
                     });
             }
 
