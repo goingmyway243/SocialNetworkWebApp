@@ -99,8 +99,6 @@ export class CreatePostComponent implements OnInit {
       img.src = URL.createObjectURL(file); // set src to blob url
       img.style.width = '100%';
       img.style.height = '100%';
-      // img.style.width = '30%';
-      // img.style.height = '15rem';
       img.style.objectFit = 'cover';
       img.style.marginRight = '0.3rem';
 

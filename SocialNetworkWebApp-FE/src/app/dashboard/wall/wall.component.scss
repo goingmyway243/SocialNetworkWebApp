@@ -68,9 +68,12 @@ body {
                 height: 10rem;
                 border-radius: 50%;
                 overflow: hidden;
-                cursor: pointer;
                 transition: all 300ms ease;
                 border: 5px solid var(--color-dark);
+
+                img {
+                    cursor: pointer;
+                }
             }
 
             .info {
@@ -193,9 +196,69 @@ body {
     gap: 1rem;
 }
 
+.upload-avatar {
+    background-color: rgba($color: white, $alpha: 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    text-align: center;
+    display: none;
+    place-items: center;
+    font-size: 1rem;
+
+    .card {
+        background-color: var(--color-white);
+        padding: 0 0.5rem var(--card-padding);
+        border-radius: var(--card-border-radius);
+        width: 30%;
+        box-shadow: 0 0 1rem var(--color-primary);
+    }
+
+    .title {
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--color-light);
+    }
+
+    .content {
+        padding: var(--card-padding);
+        padding-bottom: 0;
+
+        .btn {
+            width: 100%;
+            border-radius: var(--card-border-radius);
+        }
+
+        .btn-success {
+            background-color: rgb(0, 175, 0);
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .image-wrapper {
+            border-radius: 50%;
+            width: 30vh;
+            height: 30vh;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
 @media screen and (max-width: 1200px) {
     .container {
         width: 90%;
+    }
+
+    .upload-avatar {
+        .card {
+            width: 60vw;
+        }
     }
 }
 
@@ -206,5 +269,15 @@ body {
         .detail-info {
             display: none;
         }
+    }
+
+    .upload-avatar {
+        .card {
+            width: 70vw;
+        }
+    }
+
+    .friends-layout {
+        grid-template-columns: auto;
     }
 }

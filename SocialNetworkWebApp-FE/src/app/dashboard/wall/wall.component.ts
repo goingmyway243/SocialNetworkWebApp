@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Friendship } from 'src/app/models/friendship.model';
@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user.model';
 import { FriendshipService } from 'src/app/services/friendship.service';
 import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { RelationService } from 'src/app/services/relation.service';
+import { UploadService } from 'src/app/services/upload.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,15 +28,20 @@ export class WallComponent implements OnInit {
   friendship?: Friendship;
   relationIndex = 0;
 
+  avatar?: File;
+
   constructor(
+    private elementRef: ElementRef,
     private activedRoute: ActivatedRoute,
     private userService: UserService,
     private friendshipService: FriendshipService,
     private relationService: RelationService,
-    private newsfeedService: NewsFeedService) { }
+    private newsfeedService: NewsFeedService,
+    private uploadService: UploadService) { }
 
   ngOnInit(): void {
     this.initTabsClickEvent();
+    this.initUploadAvatarClickEvent();
     this.getWallInfomations();
   }
 
@@ -113,6 +119,41 @@ export class WallComponent implements OnInit {
     }
   }
 
+  chooseAvatar(event: any): void {
+    this.avatar = event.target.files[0];
+
+    if (this.avatar) {
+      const uploadAvatar = this.elementRef.nativeElement.querySelector('.upload-avatar') as HTMLElement;
+      const img = this.elementRef.nativeElement.querySelector('.upload-avatar .avatar') as HTMLImageElement;
+
+      uploadAvatar.style.display = 'grid';
+
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);  // no longer needed, free memory
+      }
+      img.src = URL.createObjectURL(this.avatar); // set src to blob url
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+    }
+  }
+
+  uploadAvatar(): void {
+    if (this.avatar) {
+      this.uploadService.uploadImage(this.avatar, this.currentUser.id).subscribe(_ => {
+        const img = this.elementRef.nativeElement.querySelector('.head .profile-picture img') as HTMLImageElement;
+        const uploadAvatar = this.elementRef.nativeElement.querySelector('.upload-avatar') as HTMLElement;
+
+        img.onload = () => {
+          URL.revokeObjectURL(img.src);  // no longer needed, free memory
+        }
+        img.src = URL.createObjectURL(this.avatar!); // set src to blob url
+
+        uploadAvatar.click();
+      });
+    }
+  }
+
   initTabsClickEvent(): void {
     const tabs = document.querySelectorAll('.tabs span');
     const postsLayout = document.querySelector('.container .posts-layout') as HTMLElement;
@@ -144,5 +185,14 @@ export class WallComponent implements OnInit {
         }
       });
     });
+  }
+
+  initUploadAvatarClickEvent() {
+    const uploadAvatar = this.elementRef.nativeElement.querySelector('.upload-avatar') as HTMLElement;
+    uploadAvatar.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).classList.contains('upload-avatar')) {
+        uploadAvatar.style.display = 'none';
+      }
+    })
   }
 }

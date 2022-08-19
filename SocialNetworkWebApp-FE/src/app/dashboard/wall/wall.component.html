@@ -4,7 +4,9 @@
             <div class="profile">
                 <div class="head">
                     <div class="profile-picture">
-                        <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt="">
+                        <label for="upload-image"><img [src]="this.currentUser.getAvatar()"
+                                (error)="this.currentUser.getDefaultAvatar()" alt=""></label>
+                        <input id="upload-image" type="file" accept="image/*" (change)="chooseAvatar($event)" hidden />
                     </div>
                     <div class="info">
                         <div class="name text-bold">{{this.currentUser.getFullName()}}</div>
@@ -89,5 +91,21 @@
         </div>
 
         <div class="images-layout"></div>
+    </div>
+
+    <div class="upload-avatar">
+        <div class="card">
+            <div class="title">
+                <h2>Change your avatar</h2>
+            </div>
+            <div class="content">
+                <div class="image-wrapper">
+                    <img class="avatar">
+                </div>
+                <label for="upload-image" class="btn btn-success">Choose Image</label>
+                <input id="upload-image" type="file" accept="image/*" (change)="chooseAvatar($event)" hidden />
+                <button class="btn btn-primary" (click)="uploadAvatar()">Update</button>
+            </div>
+        </div>
     </div>
 </body>
