@@ -1,4 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
+import { AppComponent } from "../app.component";
+import { Content } from "../models/content.model";
 
 export class Util {
     static getHttpErrorMessage(httpError: HttpErrorResponse): string {
@@ -37,5 +39,9 @@ export class Util {
         else {
             return Util.formatDate(date);
         }
+    }
+
+    static getFullLinkContent(content: Content): string {
+        return AppComponent.baseUrl + 'app-images/' + content.postId + '/' + content.linkContent;
     }
 }

@@ -24,6 +24,7 @@ export class NewsfeedComponent implements OnInit {
   friendRequests: Friendship[] = [];
 
   paging: number = 0;
+  canLoadMore: boolean = true;
 
   constructor(private router: Router,
     private userService: UserService,
@@ -31,6 +32,7 @@ export class NewsfeedComponent implements OnInit {
     private relationService: RelationService) { }
 
   ngOnInit(): void {
+    this.initLoadMoreScrollEvent();
     this.getHomeInfomations();
   }
 
@@ -52,6 +54,8 @@ export class NewsfeedComponent implements OnInit {
       .subscribe(data =>
         this.newFeeds = data,
         error => console.log(error));
+
+    this.paging++;
   }
 
   getFriends(): void {
@@ -119,5 +123,23 @@ export class NewsfeedComponent implements OnInit {
       this.createPost.showCreatePost();
       this.showTab(0);
     }
+  }
+
+  initLoadMoreScrollEvent(): void {
+    window.onscroll = () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight && this.canLoadMore) {
+        this.newsfeedService
+          .getUserFeeds(this.currentUser.id, this.paging, false)
+          .subscribe(data => {
+            this.canLoadMore = false;
+
+            if (data.length > 0) {
+              this.newFeeds.push(...data);
+              this.canLoadMore = true;
+              this.paging++;
+            }
+          });
+      }
+    };
   }
 }

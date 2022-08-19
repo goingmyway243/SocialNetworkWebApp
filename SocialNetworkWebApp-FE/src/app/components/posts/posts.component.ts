@@ -158,7 +158,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   }
 
   getFullLinkContent(content: Content): string {
-    return AppComponent.baseUrl + 'app-images/' + content.postId + '/' + content.linkContent;
+    return Util.getFullLinkContent(content);
   }
 
   getTimeDiff() {

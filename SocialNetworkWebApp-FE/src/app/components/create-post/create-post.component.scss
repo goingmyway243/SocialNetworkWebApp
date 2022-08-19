@@ -1,5 +1,14 @@
 @import url('../styles.scss');
 
+.profile-picture {
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
 .create-post {
     width: 100%;
     display: flex;
@@ -29,6 +38,11 @@
     .btn {
         font-size: 1.2rem;
         padding: 0.5rem 1rem;
+    }
+
+    .profile-picture {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }
 
@@ -113,6 +127,7 @@
             gap: 0.5rem;
             max-height: 17rem;
             overflow: auto;
+            margin-bottom: 1rem;
         }
 
         .add-ons {
@@ -122,7 +137,7 @@
             border-radius: var(--card-border-radius);
             border: 1px solid var(--color-gray);
             padding: 0.5rem var(--card-padding);
-            margin: 1rem 0;
+            margin: 0 0 1rem 0;
 
             .btn {
                 width: fit-content;

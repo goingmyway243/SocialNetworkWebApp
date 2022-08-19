@@ -4,9 +4,10 @@
             <div class="profile">
                 <div class="head">
                     <div class="profile-picture">
-                        <label for="upload-image"><img [src]="this.currentUser.getAvatar()"
+                        <label for="upload-avatar"><img [src]="this.currentUser.getAvatar()"
                                 (error)="this.currentUser.getDefaultAvatar()" alt=""></label>
-                        <input id="upload-image" type="file" accept="image/*" (change)="chooseAvatar($event)" hidden />
+                        <input id="upload-avatar" type="file" accept="image/*" (change)="chooseAvatar($event)" hidden
+                            *ngIf="isMyWall" />
                     </div>
                     <div class="info">
                         <div class="name text-bold">{{this.currentUser.getFullName()}}</div>
@@ -78,7 +79,7 @@
             <div class="my-posts">
                 <app-create-post *ngIf="isMyWall" [currentUser]="this.currentUser"></app-create-post>
                 <div class="feeds">
-                    <app-posts *ngFor="let feed of this.myFeeds" [currentUser]="currentUser" [postData]="feed">
+                    <app-posts *ngFor="let feed of this.myFeeds" [currentUser]="loggedUser" [postData]="feed">
                     </app-posts>
                 </div>
             </div>
@@ -90,7 +91,11 @@
             </app-friend-card>
         </div>
 
-        <div class="images-layout"></div>
+        <div class="images-layout">
+            <div class="image-wrapper" *ngFor="let image of this.images">
+                <img [src]="getFullLinkContent(image)" alt="Error">
+            </div>
+        </div>
     </div>
 
     <div class="upload-avatar">

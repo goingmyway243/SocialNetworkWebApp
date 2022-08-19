@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Util } from 'src/app/helpers/util';
+import { Content } from 'src/app/models/content.model';
 import { Friendship } from 'src/app/models/friendship.model';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
@@ -9,6 +11,7 @@ import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { RelationService } from 'src/app/services/relation.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-wall',
@@ -17,8 +20,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class WallComponent implements OnInit {
   currentUser: User = new User();
-  myFeeds?: Post[];
-  friends?: Friendship[];
+  loggedUser: User = new User();
+  myFeeds: Post[] = [];
+  friends: Friendship[] = [];
+  images: Content[] = [];
   isMyWall: boolean = true;
 
   paging: number = 0;
@@ -50,14 +55,16 @@ export class WallComponent implements OnInit {
     this.loggedUserId = localStorage.getItem('authorizeToken') as string;
 
     this.isMyWall = userID == null;
-    userID = this.isMyWall ? localStorage.getItem('authorizeToken') : userID;
+    userID = this.isMyWall ? this.loggedUserId : userID;
 
     if (userID) {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
+      this.loggedUser = this.currentUser;
       this.getMyFeeds();
       this.getFriends();
 
       if (!this.isMyWall) {
+        this.loggedUser = await firstValueFrom(this.userService.getById(this.loggedUserId));
         this.getRelationship();
       }
     }
@@ -95,6 +102,16 @@ export class WallComponent implements OnInit {
 
   }
 
+  getImages(): void {
+    if (this.images.length == 0) {
+      this.myFeeds.forEach(post => this.images.push(...post.contents!));
+    }
+  }
+
+  getFullLinkContent(content: Content): string {
+    return Util.getFullLinkContent(content);
+  }
+
   addFriend(): void {
     if (this.currentUser) {
       let newFriendship = new Friendship();
@@ -123,6 +140,16 @@ export class WallComponent implements OnInit {
     this.avatar = event.target.files[0];
 
     if (this.avatar) {
+
+      if ((this.avatar.size / 1024 / 1024) > 2) {
+        Swal.fire(
+          'Too large!',
+          'Maximum size of an avatar is 2MB',
+          'error'
+        );
+        return;
+      }
+
       const uploadAvatar = this.elementRef.nativeElement.querySelector('.upload-avatar') as HTMLElement;
       const img = this.elementRef.nativeElement.querySelector('.upload-avatar .avatar') as HTMLImageElement;
 
@@ -149,7 +176,8 @@ export class WallComponent implements OnInit {
         }
         img.src = URL.createObjectURL(this.avatar!); // set src to blob url
 
-        uploadAvatar.click();
+        // uploadAvatar.click();
+        window.location.reload();
       });
     }
   }
@@ -181,7 +209,8 @@ export class WallComponent implements OnInit {
           friendsLayout.style.display = 'grid';
         }
         else if (tab.id === 'tab-images') {
-          imagesLayout.style.display = 'block';
+          imagesLayout.style.display = 'grid';
+          this.getImages();
         }
       });
     });

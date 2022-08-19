@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user.model';
 import { ContentService } from 'src/app/services/content.service';
 import { PostService } from 'src/app/services/post.service';
 import { UploadService } from 'src/app/services/upload.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-post',
@@ -70,18 +71,36 @@ export class CreatePostComponent implements OnInit {
 
   onImageSelected(event: any): void {
     const file = event.target.files[0];
-    this.mediaContents.push(file);
-    const wrapper = this.elementRef.nativeElement.querySelector('#image-wrapper');
 
     if (file) {
+      if ((file.size / 1024 / 1024) > 5) {
+        Swal.fire(
+          'Too large!',
+          'Maximum size of a file is 5MB',
+          'error'
+        );
+        return;
+      }
+
+      this.mediaContents.push(file);
+      const wrapper = this.elementRef.nativeElement.querySelector('#image-wrapper');
+
       let container = document.createElement('div');
       container.style.position = 'relative';
       container.style.width = '33%';
       container.style.height = '15rem';
       container.style.marginRight = '0.3rem';
+      container.style.borderRadius = 'var(--card-border-radius)';
+      container.style.overflow = 'hidden';
 
       let removeBtn = document.createElement('span');
       removeBtn.innerHTML = '<i class="uil uil-multiply"></i>';
+      removeBtn.addEventListener('click', () => {
+        let index = this.mediaContents.indexOf(file);
+        this.mediaContents.splice(index, 1);
+        container.remove();
+        this.showCreatePost();
+      });
 
       removeBtn.style.position = 'absolute';
       removeBtn.style.top = '0.5rem';
