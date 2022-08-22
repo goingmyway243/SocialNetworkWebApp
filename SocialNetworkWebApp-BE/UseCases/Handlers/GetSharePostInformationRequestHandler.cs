@@ -22,7 +22,9 @@ namespace SocialNetworkWebApp.UseCases.Handlers
             var sharePost = await _dbContext.Posts
                 .Where(post => post.Id == request.SharePostId)
                 .Include(post => post.User)
+                .AsSplitQuery()
                 .Include(post => post.Contents)
+                .AsSplitQuery()
                 .ToListAsync();
             return sharePost[0];
         }

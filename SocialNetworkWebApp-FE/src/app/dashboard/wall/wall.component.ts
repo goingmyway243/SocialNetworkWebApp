@@ -2,10 +2,12 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Util } from 'src/app/helpers/util';
+import { Chatroom } from 'src/app/models/chatroom.model';
 import { Content } from 'src/app/models/content.model';
 import { Friendship } from 'src/app/models/friendship.model';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
+import { ChatroomService } from 'src/app/services/chatroom.service';
 import { FriendshipService } from 'src/app/services/friendship.service';
 import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { RelationService } from 'src/app/services/relation.service';
@@ -40,6 +42,7 @@ export class WallComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private userService: UserService,
     private friendshipService: FriendshipService,
+    private chatroomService: ChatroomService,
     private relationService: RelationService,
     private newsfeedService: NewsFeedService,
     private uploadService: UploadService) { }
@@ -113,20 +116,25 @@ export class WallComponent implements OnInit {
   }
 
   addFriend(): void {
-    if (this.currentUser) {
-      let newFriendship = new Friendship();
-      newFriendship.status = 0;
-      newFriendship.userId = this.loggedUserId;
-      newFriendship.friendId = this.currentUser.id;
+    let newFriendship = new Friendship();
+    newFriendship.status = 0;
+    newFriendship.userId = this.loggedUserId;
+    newFriendship.friendId = this.currentUser.id;
 
-      this.friendshipService.add(newFriendship).subscribe(data => this.getRelationship());
-    }
+    this.friendshipService.add(newFriendship).subscribe(data => this.getRelationship());
   }
 
   acceptFriendRequest(): void {
     if (this.friendship && this.friendship.status === 0) {
       this.friendship.status = 1;
       this.friendshipService.update(this.friendship).subscribe(data => this.getRelationship());
+
+      let chatroom = new Chatroom();
+      chatroom.chatroomName = '';
+      chatroom.chatMembers.push(...[this.loggedUser, this.currentUser]);
+
+      console.log(chatroom);
+      this.chatroomService.add(chatroom).subscribe(data => console.log(data));
     }
   }
 

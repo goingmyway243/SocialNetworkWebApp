@@ -39,7 +39,12 @@ namespace SocialNetworkWebApp.Repositories
 
         public async Task<ChatroomEntity> GetById(Guid id)
         {
-            return await _dbContext.Chatrooms.FindAsync(id);
+            var chatroom = await _dbContext.Chatrooms
+                .Where(chatroom => chatroom.Id == id)
+                .Include(chatroom => chatroom.ChatMembers)
+                .ToListAsync();
+
+            return chatroom[0];
         }
 
         public async Task Save()

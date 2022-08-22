@@ -10,6 +10,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { FriendCardComponent } from './friend-card/friend-card.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -23,7 +24,8 @@ import { FriendCardComponent } from './friend-card/friend-card.component';
     RequestsComponent,
     ProfileCardComponent,
     CommentComponent,
-    FriendCardComponent
+    FriendCardComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { FriendCardComponent } from './friend-card/friend-card.component';
     StoriesComponent,
     ProfileCardComponent,
     FriendCardComponent,
-    CommentComponent
+    CommentComponent,
+    ChatComponent
   ]
 })
 export class ComponentsModule { }

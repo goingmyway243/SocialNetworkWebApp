@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using SocialNetworkWebApp.DTOs;
 using System;
+using System.Collections.Generic;
 
 namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands
 {
@@ -7,5 +9,6 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands
     {
         public Guid Id { get; set; }
         public string ChatroomName { get; set; }
+        public List<UserDTO> ChatMembers { get; set; }
     }
 }

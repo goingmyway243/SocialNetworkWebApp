@@ -1,7 +1,7 @@
 <div class="request">
     <div class="info">
         <div class="profile-picture">
-            <img [src]="this.user.getAvatar()" (error)="this.user.getDefaultAvatar()" alt="">
+            <img (click)="navigateToWall()" [src]="this.user.getAvatar()" (error)="this.user.getDefaultAvatar()" alt="">
         </div>
         <div>
             <h4>{{this.user.getFullName()}}</h4>

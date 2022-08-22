@@ -1,0 +1,9 @@
+@import url('../styles.scss');
+
+.chat {
+    width: 20rem;
+    height: 25rem;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    background-color: var(--color-white);
+}

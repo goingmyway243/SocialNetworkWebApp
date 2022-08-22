@@ -48,7 +48,9 @@ namespace SocialNetworkWebApp.UseCases.Handlers
                 .Skip(postsOfEachPage * request.Paging)
                 .Take(postsOfEachPage)
                 .Include(post => post.Contents)
+                .AsSplitQuery()
                 .Include(post => post.Reacts)
+                .AsSplitQuery()
                 .ToListAsync();
         }
     }

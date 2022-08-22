@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
 import { FriendshipService } from 'src/app/services/friendship.service';
@@ -17,6 +18,7 @@ export class RequestsComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
+    private router: Router,
     private userService: UserService,
     private friendshipService: FriendshipService
   ) { }
@@ -46,5 +48,9 @@ export class RequestsComponent implements OnInit {
     responseElm.style.display = 'block';
 
     this.response = result;
+  }
+
+  navigateToWall(): void {
+    this.router.navigateByUrl(`home/wall/${this.friendshipData.userId}`);
   }
 }
