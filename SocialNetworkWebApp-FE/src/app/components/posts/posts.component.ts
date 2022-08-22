@@ -25,11 +25,17 @@ export class PostsComponent implements OnInit, AfterViewInit {
   @Input() currentUser!: User;
   postOwner: User = new User();
 
-  captionArray?: string[];
+  captionArray: string[] = [];
+
+  sharePostData?: Post;
+  shareCaptionArray: string[] = [];
+  sharePostOwner: User = new User();
+  sharePostTimeDiff: string = '';
 
   likedByString: string = '';
   userReact?: React;
   comment: string = '';
+  shareCaption: string = '';
 
   commentPaging: number = 0;
   commentSize: number = 1;
@@ -52,6 +58,8 @@ export class PostsComponent implements OnInit, AfterViewInit {
     private additionalService: AdditionalService) { }
 
   ngOnInit(): void {
+    this.initSharePostClickEvent();
+
     this.convertPostData();
     this.getTimeDiff();
     this.getPostOwner();
@@ -66,6 +74,15 @@ export class PostsComponent implements OnInit, AfterViewInit {
   convertPostData(): void {
     this.postData = Object.assign(new Post(), this.postData);
     this.captionArray = this.postData.caption.split('\n');
+
+    if (this.postData.sharePostId) {
+      this.additionalService.getSharePost(this.postData.sharePostId).subscribe(data => {
+        this.sharePostData = data;
+        this.shareCaptionArray = this.sharePostData.caption.split('\n');
+        this.sharePostOwner = Object.assign(new User(), this.sharePostData.user);
+        this.sharePostTimeDiff = Util.getTimeDiff(this.sharePostData.createdTime);
+      });
+    }
   }
 
   getPostOwner(): void {
@@ -172,15 +189,17 @@ export class PostsComponent implements OnInit, AfterViewInit {
       let length = this.postData.contents.length;
 
       if (length > 1) {
-        const wrapper = this.elementRef.nativeElement.querySelector('.photo') as HTMLElement;
-        const images = wrapper.querySelectorAll('.photo img');
+        const wrappers = this.elementRef.nativeElement.querySelectorAll('.photo') as HTMLElement[];
 
-        wrapper.style.display = 'flex';
-        images.forEach(img => {
-          (img as HTMLElement).style.width = (100 / length) + '%';
+        wrappers.forEach(wrapper => {
+          const images = wrapper.querySelectorAll('.photo img');
+
+          wrapper.style.display = 'flex';
+          images.forEach(img => {
+            (img as HTMLElement).style.width = (100 / length) + '%';
+          });
         });
       }
-
     }
   }
 
@@ -231,6 +250,32 @@ export class PostsComponent implements OnInit, AfterViewInit {
   onCommentButtonClick(): void {
     const input = this.elementRef.nativeElement.querySelector('.create-comment input') as HTMLInputElement;
     input.focus();
+  }
+
+  onShareButtonClick(): void {
+    const sharing = this.elementRef.nativeElement.querySelector('.create-share') as HTMLElement;
+    sharing.style.display = 'grid';
+  }
+
+  sharePost(): void {
+    if (this.postData) {
+      let sharePost = new Post();
+      sharePost.sharePostId = this.postData.sharePostId ? this.postData.sharePostId : this.postData.id;
+      sharePost.userId = this.currentUser.id;
+      sharePost.caption = this.shareCaption;
+
+      this.postService.add(sharePost).subscribe(success => this.router.navigateByUrl(''));
+    }
+  }
+
+  initSharePostClickEvent(): void {
+    const sharing = this.elementRef.nativeElement.querySelector('.create-share') as HTMLElement;
+    sharing.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).classList.contains('create-share')) {
+        sharing.style.display = 'none';
+        this.shareCaption = '';
+      }
+    });
   }
 
   navigateToWall(userId: string = ''): void {

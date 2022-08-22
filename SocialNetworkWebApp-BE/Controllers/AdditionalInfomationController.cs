@@ -23,5 +23,11 @@ namespace SocialNetworkWebApp.Controllers
         {
             return Ok(await _mediator.Send(new GetTotalCommentsByPostIdRequest { PostId = postId }));
         }
+
+        [HttpPost("{sharePostId}")]
+        public async Task<IActionResult> GetSharePostInformation(Guid sharePostId)
+        {
+            return Ok(await _mediator.Send(new GetSharePostInformationRequest { SharePostId = sharePostId }));
+        }
     }
 }
