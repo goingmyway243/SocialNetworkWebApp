@@ -10,7 +10,6 @@ import { RequestsComponent } from './requests/requests.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { FriendCardComponent } from './friend-card/friend-card.component';
-import { PostContentComponent } from './post-content/post-content.component';
 
 
 
@@ -24,8 +23,7 @@ import { PostContentComponent } from './post-content/post-content.component';
     RequestsComponent,
     ProfileCardComponent,
     CommentComponent,
-    FriendCardComponent,
-    PostContentComponent
+    FriendCardComponent
   ],
   imports: [
     CommonModule,

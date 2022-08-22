@@ -44,8 +44,10 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   canViewMore: boolean = false;
   splitComment: boolean = true;
+  editMode: boolean = false;
 
   timeDiff: string = '';
+  editCaption: string = '';
 
   constructor(
     private elementRef: ElementRef,
@@ -69,6 +71,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.handleMultiImages();
+    this.setEditMode(false);
   }
 
   convertPostData(): void {
@@ -231,6 +234,40 @@ export class PostsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  setEditMode(mode: boolean): void {
+    const input = this.elementRef.nativeElement.querySelector('.input-edit') as HTMLInputElement;
+
+    this.editMode = mode;
+    input.style.display = mode ? 'block' : 'none';
+
+    if (mode && this.postData) {
+      const popup = this.elementRef.nativeElement.querySelector('.edit .edit-popup');
+
+      this.editCaption = this.postData.caption;
+      popup.style.display = 'none';
+      input.focus();
+    }
+  }
+
+  onEditInput(event: any): void {
+    if (this.postData) {
+      let isDifferent = event.target.value !== this.postData.caption;
+      const saveButton = this.elementRef.nativeElement.querySelector('.edit-mode .btn-primary') as HTMLButtonElement;
+      saveButton.disabled = !isDifferent;
+    }
+  }
+
+  onSaveButtonClick(): void {
+    if (this.postData) {
+      this.postData.caption = this.editCaption;
+
+      this.postService.update(this.postData).subscribe(success => {
+        this.setEditMode(false);
+        this.captionArray = this.postData!.caption.split('\n');
+      });
+    }
+  }
+
   onLikeButtonClick(): void {
     if (this.postData && this.currentUser) {
       if (this.userReact) {
@@ -254,7 +291,10 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   onShareButtonClick(): void {
     const sharing = this.elementRef.nativeElement.querySelector('.create-share') as HTMLElement;
+    const input = this.elementRef.nativeElement.querySelector('.create-share .textarea') as HTMLInputElement;
+
     sharing.style.display = 'grid';
+    input.focus();
   }
 
   sharePost(): void {
