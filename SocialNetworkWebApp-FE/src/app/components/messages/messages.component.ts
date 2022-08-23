@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Chatroom } from 'src/app/models/chatroom.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-messages',
@@ -7,12 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
   @Input() totalRequests: number = 0;
+  @Input() currentUser!: User;
+  @Input() chatrooms: Chatroom[] = [];
+
+  @Output() onChatroomSelect: EventEmitter<Chatroom> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
     this.initSearchMessageEvent();
     this.initCategoriesClickEvent();
+  }
+
+  chatroomSelect(chatroom: Chatroom): void {
+    this.onChatroomSelect.emit(chatroom);
   }
 
   initSearchMessageEvent(): void {

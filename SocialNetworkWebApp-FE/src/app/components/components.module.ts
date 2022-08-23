@@ -11,6 +11,7 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { FriendCardComponent } from './friend-card/friend-card.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
 
 
 
@@ -25,7 +26,8 @@ import { ChatComponent } from './chat/chat.component';
     ProfileCardComponent,
     CommentComponent,
     FriendCardComponent,
-    ChatComponent
+    ChatComponent,
+    ChatroomComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ChatComponent } from './chat/chat.component';
     ProfileCardComponent,
     FriendCardComponent,
     CommentComponent,
-    ChatComponent
+    ChatComponent,
+    ChatroomComponent
   ]
 })
 export class ComponentsModule { }

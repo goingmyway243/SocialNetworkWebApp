@@ -13,6 +13,11 @@ export class ChattingService {
 
   constructor(private http: HttpClient) { }
 
+  getAllChatroomsByUserId(userId: string): Observable<Chatroom[]> {
+    let apiGet = `${this.apiUrl}/${userId}`;
+    return this.http.get<Chatroom[]>(apiGet);
+  }
+
   getChatroomByUserAndFriend(user: User, friend: User): Observable<Chatroom> {
     return this.http.post(this.apiUrl, { user: user, friend: friend }, AppComponent.httpOptions)
       .pipe(map(data => Object.assign(new Chatroom(), data)));

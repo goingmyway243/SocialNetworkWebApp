@@ -34,7 +34,8 @@
         </div>
         <!-- ====================== RIGHT ========================== -->
         <div class="right">
-            <app-messages [totalRequests]="this.friendRequests.length"></app-messages>
+            <app-messages [totalRequests]="this.friendRequests.length" [chatrooms]="this.chatrooms"
+                [currentUser]="this.currentUser" (onChatroomSelect)="showChatroom($event,true)"></app-messages>
 
             <!-- FRIEND REQUESTS -->
             <div class="friend-requests" *ngIf="this.friendRequests.length>0">
@@ -44,5 +45,10 @@
                 </app-requests>
             </div>
         </div>
+    </div>
+
+    <div class="chatroom">
+        <app-chat [chatroomData]="this.chatroomData" [currentUser]="this.currentUser"
+            (onClose)="showChatroom(null,$event)"></app-chat>
     </div>
 </body>

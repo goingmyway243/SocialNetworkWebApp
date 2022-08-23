@@ -9,12 +9,11 @@
         <span class="close" (click)="close()"><i class="uil uil-multiply"></i></span>
     </div>
     <div class="chat-messages">
-        <div class="content">dsadsad</div>
-        <div class="content mine">dsadsad</div>
-        <div class="content mine">dsadsad</div>
+        <div class="content" *ngFor="let mess of this.chatMessages"
+            [ngClass]="{'mine': mess.userId === this.currentUser.id}">dsadsad</div>
     </div>
-    <div class="input-message">
-        <input class="input" type="text" placeholder="Aa">
-        <span class="send"><i class="uil uil-message"></i></span>
-    </div>
+    <form class="input-message" (submit)="sendMessage()">
+        <input class="input" type="text" placeholder="Aa" [(ngModel)]="this.message" name="input-message">
+        <span class="send" (click)="sendMessage()"><i class="uil uil-message"></i></span>
+    </form>
 </div>

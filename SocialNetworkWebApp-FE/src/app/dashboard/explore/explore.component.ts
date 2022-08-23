@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Chatroom } from 'src/app/models/chatroom.model';
 import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
+import { ChattingService } from 'src/app/services/chatting.service';
 import { RelationService } from 'src/app/services/relation.service';
 import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,15 +17,21 @@ import Swal from 'sweetalert2';
 })
 export class ExploreComponent implements OnInit {
   currentUser: User = new User();
+  chatroomData: Chatroom = new Chatroom();
+
   searchedUsers: User[] = [];
   friends: Friendship[] = [];
   friendRequests: Friendship[] = [];
+  chatrooms: Chatroom[] = [];
 
-  constructor(private router: Router,
+  constructor(
+    private elementRef: ElementRef,
+    private router: Router,
     private activedRoute: ActivatedRoute,
     private userService: UserService,
     private searchService: SearchService,
-    private relationService: RelationService) { }
+    private relationService: RelationService,
+    private chattingService: ChattingService) { }
 
   ngOnInit(): void {
     this.searchUserByKeyword();
@@ -35,6 +43,7 @@ export class ExploreComponent implements OnInit {
       this.currentUser = await firstValueFrom(this.userService.getById(userID));
 
       this.getFriendRequests();
+      this.getChatrooms();
     }
   }
 
@@ -44,6 +53,10 @@ export class ExploreComponent implements OnInit {
 
   getFriendRequests(): void {
     this.relationService.getFriendRequestByUserId(this.currentUser.id).subscribe(data => this.friendRequests = data);
+  }
+
+  getChatrooms(): void {
+    this.chattingService.getAllChatroomsByUserId(this.currentUser.id).subscribe(data => this.chatrooms = data);
   }
 
   async searchUserByKeyword(): Promise<void> {
@@ -73,6 +86,15 @@ export class ExploreComponent implements OnInit {
         this.router.navigateByUrl('');
       }
     });
+  }
+
+  showChatroom(chatroom: Chatroom | null, isShow: boolean): void {
+    const popup = this.elementRef.nativeElement.querySelector('.chatroom');
+    popup.style.display = isShow ? 'block' : 'none';
+
+    if (chatroom) {
+      this.chatroomData = chatroom;
+    }
   }
 
   showTab(tabIndex: number): void {

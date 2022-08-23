@@ -38,11 +38,6 @@ export class RequestsComponent implements OnInit {
     this.userService.getById(this.friendshipData.userId).subscribe(data => this.user = data);
   }
 
-  // accept(): void {
-  //   this.friendshipData.status = 1;
-  //   this.friendshipService.update(this.friendshipData).subscribe(_ => this.showResponse('accepted'));
-  // }
-
   async accept(): Promise<void> {
     if (this.friendshipData.status === 0) {
       this.friendshipData.status = 1;

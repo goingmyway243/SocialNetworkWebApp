@@ -1,0 +1,50 @@
+@import url(../styles.scss);
+
+.message {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.75;
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+
+    p {
+        font-size: 0.85rem;
+    }
+
+    .profile-picture {
+        position: relative;
+        overflow: visible;
+
+        img {
+            border-radius: 50%;
+        }
+
+        .active {
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            background-color: var(--color-success);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        h5 {
+            font-size: 0.85rem;
+        }
+    }
+}
