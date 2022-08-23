@@ -112,6 +112,12 @@ body {
     }
 }
 
+.chatrooms {
+    position: fixed;
+    bottom: 0;
+    right: 5rem;
+}
+
 @media screen and (max-width: 1200px) {
     .container {
         grid-template-columns: 5rem auto 30vw;

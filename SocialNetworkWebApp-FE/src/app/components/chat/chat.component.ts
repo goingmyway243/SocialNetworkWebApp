@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input() chatUser!: User;
 
-  constructor() { }
+  constructor(
+    private elementRef: ElementRef) { }
 
   ngOnInit(): void {
   }
 
+  close(): void {
+    const popup = this.elementRef.nativeElement.querySelector('.chat');
+    popup.style.display = 'none';
+  }
 }

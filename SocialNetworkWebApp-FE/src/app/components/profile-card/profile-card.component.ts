@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Friendship } from 'src/app/models/friendship.model';
 import { User } from 'src/app/models/user.model';
+import { ChatroomService } from 'src/app/services/chatroom.service';
+import { ChattingService } from 'src/app/services/chatting.service';
 import { FriendshipService } from 'src/app/services/friendship.service';
 import { RelationService } from 'src/app/services/relation.service';
 
@@ -22,6 +24,8 @@ export class ProfileCardComponent implements OnInit {
   constructor(
     private router: Router,
     private friendshipService: FriendshipService,
+    private chatroomService: ChatroomService,
+    private chattingService: ChattingService,
     private relationService: RelationService) { }
 
   ngOnInit(): void {
@@ -38,7 +42,7 @@ export class ProfileCardComponent implements OnInit {
         this.relationService.getRelationshipBetweenUsers(
           this.user.id, this.currentUser.id));
 
-      this.relationIndex = this.friendship.status !== null ? (this.friendship.status + 1) : 0;
+      this.relationIndex = this.friendship !== null ? (this.friendship.status + 1) : 0;
       if (this.relationIndex === 1 && this.friendship.friendId === this.currentUser.id) {
         this.relationIndex = 4;
       }
@@ -76,9 +80,14 @@ export class ProfileCardComponent implements OnInit {
     }
   }
 
-  unFriend(): void {
-    if (this.friendship) {
+  async unFriend(): Promise<void> {
+    if (this.friendship && this.currentUser) {
       this.friendshipService.delete(this.friendship.id).subscribe(data => this.relationIndex = 0);
+
+      let chatroom = await lastValueFrom(this.chattingService.getChatroomByUserAndFriend(this.currentUser, this.user));
+      if (chatroom) {
+        this.chatroomService.delete(chatroom.id).subscribe(data => console.log(data));
+      }
     }
   }
 

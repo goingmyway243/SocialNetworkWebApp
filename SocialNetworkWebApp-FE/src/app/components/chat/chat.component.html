@@ -1,11 +1,20 @@
 <div class="chat">
     <div class="title">
-        <div class="profile-picture">
-            <!-- <img [src]="this.currentUser.getAvatar()" (error)="this.currentUser.getDefaultAvatar()" alt=""> -->
+        <div class="profile">
+            <div class="profile-picture">
+                <img [src]="this.chatUser.getAvatar()" (error)="this.chatUser.getDefaultAvatar()" alt="">
+            </div>
+            <h4>{{this.chatUser.getFullName()}}</h4>
         </div>
-        <h4>Name</h4>
+        <span class="close" (click)="close()"><i class="uil uil-multiply"></i></span>
     </div>
     <div class="chat-messages">
-
+        <div class="content">dsadsad</div>
+        <div class="content mine">dsadsad</div>
+        <div class="content mine">dsadsad</div>
+    </div>
+    <div class="input-message">
+        <input class="input" type="text" placeholder="Aa">
+        <span class="send"><i class="uil uil-message"></i></span>
     </div>
 </div>

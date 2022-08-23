@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { Util } from 'src/app/helpers/util';
 import { Chatroom } from 'src/app/models/chatroom.model';
 import { Content } from 'src/app/models/content.model';
@@ -8,6 +8,7 @@ import { Friendship } from 'src/app/models/friendship.model';
 import { Post } from 'src/app/models/post.model';
 import { User } from 'src/app/models/user.model';
 import { ChatroomService } from 'src/app/services/chatroom.service';
+import { ChattingService } from 'src/app/services/chatting.service';
 import { FriendshipService } from 'src/app/services/friendship.service';
 import { NewsFeedService } from 'src/app/services/newfeeds.service';
 import { RelationService } from 'src/app/services/relation.service';
@@ -45,7 +46,8 @@ export class WallComponent implements OnInit {
     private chatroomService: ChatroomService,
     private relationService: RelationService,
     private newsfeedService: NewsFeedService,
-    private uploadService: UploadService) { }
+    private uploadService: UploadService,
+    private chattingService: ChattingService) { }
 
   ngOnInit(): void {
     this.initTabsClickEvent();
@@ -78,7 +80,7 @@ export class WallComponent implements OnInit {
       this.relationService.getRelationshipBetweenUsers(
         this.loggedUserId, this.currentUser.id));
 
-    this.relationIndex = this.friendship.status !== null ? (this.friendship.status + 1) : 0;
+    this.relationIndex = this.friendship !== null ? (this.friendship.status + 1) : 0;
     if (this.relationIndex === 1 && this.friendship.friendId === this.currentUser.id) {
       this.relationIndex = 4;
     }
@@ -124,23 +126,29 @@ export class WallComponent implements OnInit {
     this.friendshipService.add(newFriendship).subscribe(data => this.getRelationship());
   }
 
-  acceptFriendRequest(): void {
+  async acceptFriendRequest(): Promise<void> {
     if (this.friendship && this.friendship.status === 0) {
       this.friendship.status = 1;
       this.friendshipService.update(this.friendship).subscribe(data => this.getRelationship());
 
       let chatroom = new Chatroom();
       chatroom.chatroomName = '';
-      chatroom.chatMembers.push(...[this.loggedUser, this.currentUser]);
+      chatroom.id = await lastValueFrom(this.chatroomService.add(chatroom));
 
-      console.log(chatroom);
-      this.chatroomService.add(chatroom).subscribe(data => console.log(data));
+      chatroom.chatMembers.push(...[this.loggedUser, this.currentUser]);
+      this.chatroomService.update(chatroom).subscribe();
     }
   }
 
-  unFriend(): void {
+  async unFriend(): Promise<void> {
     if (this.friendship) {
       this.friendshipService.delete(this.friendship.id).subscribe(data => this.relationIndex = 0);
+
+      let chatroom = await lastValueFrom(this.chattingService.getChatroomByUserAndFriend(this.currentUser, this.loggedUser));
+
+      if (chatroom) {
+        this.chatroomService.delete(chatroom.id).subscribe(data => console.log(data));
+      }
     }
   }
 
