@@ -10,5 +10,6 @@ namespace SocialNetworkWebApp.UseCases
     public class GetAllMessagesByChatroomIdRequest:IRequest<IEnumerable<MessageEntity>>
     {
         public Guid ChatroomId { get; set; }
+        public bool GetLatest{ get; set; }
     }
 }

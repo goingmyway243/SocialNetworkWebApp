@@ -31,9 +31,9 @@ namespace SocialNetworkWebApp.Controllers
         }
 
         [HttpPost("{chatroomId}")]
-        public async Task<IActionResult> GetMessageByChatroomId(Guid chatroomId)
+        public async Task<IActionResult> GetMessageByChatroomId(GetAllMessagesByChatroomIdRequest request)
         {
-            return Ok(await _mediator.Send(new GetAllMessagesByChatroomIdRequest { ChatroomId = chatroomId }));
+            return Ok(await _mediator.Send(request));
         }
     }
 }

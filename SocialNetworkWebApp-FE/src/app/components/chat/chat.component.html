@@ -10,7 +10,7 @@
     </div>
     <div class="chat-messages">
         <div class="content" *ngFor="let mess of this.chatMessages"
-            [ngClass]="{'mine': mess.userId === this.currentUser.id}">dsadsad</div>
+            [ngClass]="{'mine': mess.userId === this.currentUser.id}">{{mess.message}}</div>
     </div>
     <form class="input-message" (submit)="sendMessage()">
         <input class="input" type="text" placeholder="Aa" [(ngModel)]="this.message" name="input-message">

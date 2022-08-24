@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Chatroom } from 'src/app/models/chatroom.model';
 import { Message } from 'src/app/models/message.model';
 import { User } from 'src/app/models/user.model';
+import { ChattingService } from 'src/app/services/chatting.service';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -20,15 +21,20 @@ export class ChatComponent implements OnInit, OnChanges {
 
   chatMessages: Message[] = [];
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private elementRef: ElementRef,
+    private messageService: MessageService,
+    private chattingService: ChattingService) { }
 
   ngOnInit(): void {
 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getChatUser();
-    this.getChatMessages();
+    if (this.chatroomData.chatMembers.length > 0) {
+      this.getChatUser();
+      this.getChatMessages();
+    }
   }
 
   getChatUser(): void {
@@ -39,7 +45,11 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   getChatMessages(): void {
-
+    this.chattingService.getMessageByChatroomId(this.chatroomData.id, false).subscribe(data => {
+      this.chatMessages = data;
+      const contents = this.elementRef.nativeElement.querySelector('.chat-messages') as HTMLElement;
+      setTimeout(() => contents.scrollTop = contents.scrollHeight, 55);
+    });
   }
 
   close(): void {
@@ -47,15 +57,19 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   sendMessage(): void {
-    this.message = '';
+    if (this.message) {
+      let newMessage = new Message();
+      newMessage.chatroomId = this.chatroomData.id;
+      newMessage.userId = this.currentUser.id;
+      newMessage.message = this.message;
 
-    let newMessage = new Message();
-    newMessage.chatroomId = this.chatroomData.id;
-    newMessage.userId = this.currentUser.id;
-    newMessage.message = this.message;
+      this.messageService.add(newMessage).subscribe(success => {
+        this.chatMessages.push(newMessage);
+        const contents = this.elementRef.nativeElement.querySelector('.chat-messages') as HTMLElement;
+        setTimeout(() => contents.scrollTop = contents.scrollHeight, 55);
+      });
 
-    this.messageService.add(newMessage).subscribe(success => {
-      this.chatMessages.push(newMessage);
-    });
+      this.message = '';
+    }
   }
 }

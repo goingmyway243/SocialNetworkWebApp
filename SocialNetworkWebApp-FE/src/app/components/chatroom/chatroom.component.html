@@ -5,8 +5,11 @@
     </div>
     <div class="message-body">
         <h5>{{this.chatUser.getFullName()}}</h5>
-        <p class="text-muted">
-            Say hi to new friend
+        <p class="text-muted" *ngIf="this.latestMessage">
+            {{this.latestMessage.message}}
+        </p>
+        <p class="text-bold" *ngIf="!this.latestMessage">
+            Say hi to your new friend
         </p>
     </div>
 </div>

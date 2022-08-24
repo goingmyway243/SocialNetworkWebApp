@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chatroom } from 'src/app/models/chatroom.model';
+import { Message } from 'src/app/models/message.model';
 import { User } from 'src/app/models/user.model';
+import { ChattingService } from 'src/app/services/chatting.service';
 
 @Component({
   selector: 'app-chatroom',
@@ -14,11 +16,13 @@ export class ChatroomComponent implements OnInit {
   @Output() onChatroomSelect: EventEmitter<Chatroom> = new EventEmitter();
 
   chatUser: User = new User();
+  latestMessage: Message = new Message();
 
-  constructor() { }
+  constructor(private chattingService: ChattingService) { }
 
   ngOnInit(): void {
     this.getChatUser();
+    this.getLatestMessage();
   }
 
   getChatUser(): void {
@@ -26,6 +30,12 @@ export class ChatroomComponent implements OnInit {
       this.chatroomData.chatMembers[1] : this.chatroomData.chatMembers[0];
 
     this.chatUser = Object.assign(new User(), this.chatUser);
+  }
+
+  getLatestMessage(): void {
+    this.chattingService.getMessageByChatroomId(this.chatroomData.id, true).subscribe(data => {
+      this.latestMessage = data[0];
+    });
   }
 
   chatroomSelect(): void {
