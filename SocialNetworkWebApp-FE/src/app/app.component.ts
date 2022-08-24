@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     })
   };
   static defaultAvatar: string = AppComponent.baseUrl + 'app-images/default.jpg';
+  static currentUser: User = new User();
 
   constructor(private router: Router) { }
 

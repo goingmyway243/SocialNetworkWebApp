@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { CreatePostComponent } from 'src/app/components/create-post/create-post.component';
@@ -30,9 +31,16 @@ export class NewsfeedComponent implements OnInit {
   paging: number = 0;
   canLoadMore: boolean = true;
 
+  changePassForm: FormGroup = new FormGroup('');
+
+  currentPassStr: string = '';
+  newPassStr: string = '';
+  confirmPassStr: string = '';
+
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private newsfeedService: NewsFeedService,
     private relationService: RelationService,
@@ -40,6 +48,9 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLoadMoreScrollEvent();
+    this.initChangePassFormGroup();
+    this.initChangePassClickEvent();
+
     this.getHomeInfomations();
   }
 
@@ -93,10 +104,56 @@ export class NewsfeedComponent implements OnInit {
     }).then(result => {
       if (result.isConfirmed) {
         localStorage.removeItem('authorizeToken');
-
-        console.log(localStorage);
         this.router.navigateByUrl('');
       }
+    });
+  }
+
+  changePassword(): void {
+    let valid = true;
+    let message = '';
+
+    if (this.changePassForm.invalid) {
+      return;
+    }
+
+    if (this.currentPassStr !== this.currentUser.password) {
+      valid = false;
+      message = 'Current password is incorrect!';
+    }
+    else if (this.currentPassStr === this.newPassStr) {
+      valid = false;
+      message = 'New password must be different from current password!';
+    }
+    else if (this.newPassStr !== this.confirmPassStr) {
+      valid = false;
+      message = 'Re-type password is incorrect!';
+    }
+
+    if (!valid) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      return;
+    }
+
+    this.currentUser.password = this.newPassStr;
+    this.userService.update(this.currentUser).subscribe(success => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Change password successfully',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(result => {
+        localStorage.removeItem('authorizeToken');
+        this.router.navigateByUrl('');
+      });
     });
   }
 
@@ -107,12 +164,11 @@ export class NewsfeedComponent implements OnInit {
     if (chatroom) {
       this.chatroomData = chatroom;
     }
-    // if (isShow && chatroom) {
-    //   this.chatUser = this.currentUser.id === chatroom.chatMembers[0].id ?
-    //     chatroom.chatMembers[1] : chatroom.chatMembers[0];
+  }
 
-    //   this.chatUser = Object.assign(new User(), this.chatUser);
-    // }
+  showChangePass(): void {
+    const popup = this.elementRef.nativeElement.querySelector('.change-password') as HTMLElement;
+    popup.style.display = 'grid';
   }
 
   showTab(tabIndex: number): void {
@@ -150,6 +206,24 @@ export class NewsfeedComponent implements OnInit {
       this.createPost.showCreatePost();
       this.showTab(0);
     }
+  }
+
+  initChangePassClickEvent(): void {
+    const popup = this.elementRef.nativeElement.querySelector('.change-password') as HTMLElement;
+
+    popup.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).classList.contains('change-password')) {
+        popup.style.display = 'none';
+      }
+    });
+  }
+
+  initChangePassFormGroup(): void {
+    this.changePassForm = this.formBuilder.group({
+      oldPass: ['', Validators.required],
+      newPass: ['', Validators.required],
+      confirmPass: ['', Validators.required]
+    });
   }
 
   initLoadMoreScrollEvent(): void {

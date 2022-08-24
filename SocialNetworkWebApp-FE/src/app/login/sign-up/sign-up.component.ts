@@ -79,7 +79,7 @@ export class SignUpComponent implements OnInit {
         title: message,
         showConfirmButton: false,
         timer: 1500
-      })
+      });
     }
 
     return check;
