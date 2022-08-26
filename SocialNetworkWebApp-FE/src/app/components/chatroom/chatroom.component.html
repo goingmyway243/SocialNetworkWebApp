@@ -1,4 +1,4 @@
-<div class="message" (click)="chatroomSelect()">
+<div class="message" (click)="chatroomSelect()" *ngIf="!searchKeyword || isContainsKeyword()">
     <div class="profile-picture">
         <img [src]="this.chatUser.getAvatar()" (error)="this.chatUser.getDefaultAvatar()" alt="">
         <div class="active"></div>

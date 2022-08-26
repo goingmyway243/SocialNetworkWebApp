@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chatroom } from 'src/app/models/chatroom.model';
 import { User } from 'src/app/models/user.model';
 
@@ -14,10 +14,11 @@ export class MessagesComponent implements OnInit {
 
   @Output() onChatroomSelect: EventEmitter<Chatroom> = new EventEmitter();
 
-  constructor() { }
+  searchKeyword: string = '';
+
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.initSearchMessageEvent();
     this.initCategoriesClickEvent();
   }
 
@@ -27,9 +28,9 @@ export class MessagesComponent implements OnInit {
 
   initSearchMessageEvent(): void {
     const listMessage = document.querySelectorAll('.message');
-    const messageSearch = document.getElementById('message-search') as HTMLInputElement;
+    const messageSearch = this.elementRef.nativeElement.querySelector('.search-bar #message-search') as HTMLInputElement;
 
-    messageSearch?.addEventListener('input', () => {
+    messageSearch.addEventListener('input', () => {
       const keyword = messageSearch.value.toLowerCase();
       listMessage.forEach(chat => {
         let name = chat.querySelector('h5')?.textContent?.toLowerCase();

@@ -12,6 +12,7 @@ import { ChattingService } from 'src/app/services/chatting.service';
 export class ChatroomComponent implements OnInit {
   @Input() chatroomData!: Chatroom;
   @Input() currentUser!: User;
+  @Input() searchKeyword: string = '';
 
   @Output() onChatroomSelect: EventEmitter<Chatroom> = new EventEmitter();
 
@@ -40,5 +41,11 @@ export class ChatroomComponent implements OnInit {
 
   chatroomSelect(): void {
     this.onChatroomSelect.emit(this.chatroomData);
+  }
+
+  isContainsKeyword(): boolean {
+    let fullname = this.chatUser.getFullName().toLowerCase();
+    let keyword = this.searchKeyword.toLowerCase();
+    return fullname.indexOf(keyword) !== -1;
   }
 }

@@ -3,10 +3,11 @@
         <h3>Messages</h3><i class="uil uil-edit"></i>
     </div>
     <!-- --------- SEARCH BAR --------------- -->
-    <div class="search-bar">
+    <form class="search-bar">
         <i class="uil uil-search"></i>
-        <input type="search" placeholder="Search messages" id="message-search">
-    </div>
+        <input type="search" placeholder="Search messages" id="message-search" [(ngModel)]="this.searchKeyword"
+            name="search-message">
+    </form>
     <!-- MESSAGES CATEGORY -->
     <div class="category">
         <h6 class="active" id="primary">
@@ -19,6 +20,6 @@
     <!-- MESSAGE -->
     <div class="list-messages">
         <app-chatroom *ngFor="let chatroom of this.chatrooms" [chatroomData]="chatroom" [currentUser]="this.currentUser"
-            (onChatroomSelect)="chatroomSelect($event)"></app-chatroom>
+            (onChatroomSelect)="chatroomSelect($event)" [searchKeyword]="this.searchKeyword"></app-chatroom>
     </div>
 </div>
