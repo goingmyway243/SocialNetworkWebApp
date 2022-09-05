@@ -27,7 +27,9 @@ export class WallComponent implements OnInit {
   myFeeds: Post[] = [];
   friends: Friendship[] = [];
   images: Content[] = [];
+
   isMyWall: boolean = true;
+  canLoadMore: boolean = true;
 
   paging: number = 0;
   loggedUserId: string = '';
@@ -51,6 +53,7 @@ export class WallComponent implements OnInit {
 
   ngOnInit(): void {
     this.initTabsClickEvent();
+    this.initLoadMoreScrollEvent();
     this.initUploadAvatarClickEvent();
     this.getWallInfomations();
   }
@@ -239,5 +242,23 @@ export class WallComponent implements OnInit {
         uploadAvatar.style.display = 'none';
       }
     })
+  }
+
+  initLoadMoreScrollEvent(): void {
+    window.onscroll = () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight && this.canLoadMore) {
+        this.newsfeedService
+          .getUserFeeds(this.currentUser.id, this.paging, false)
+          .subscribe(data => {
+            this.canLoadMore = false;
+
+            if (data.length > 0) {
+              this.myFeeds.push(...data);
+              this.canLoadMore = true;
+              this.paging++;
+            }
+          });
+      }
+    };
   }
 }
