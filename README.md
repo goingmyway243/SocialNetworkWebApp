@@ -15,3 +15,10 @@ HOW TO LAUNCH APP
 
 #2: Open terminal/command line, type and enter this command: 
 	ng serve --open
+	
+	
+################# Browser ##################
+
+#1: Install extension: Allow CORS: Access-Control-Allow-Origin
+
+#2: Toggle on Allow CORS in SocialNetworkWebApp tab to make api work properly
